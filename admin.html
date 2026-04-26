@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRank Admin - Data Updates</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .update-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .update-btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .update-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+        }
+        .update-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .update-type {
+            margin-bottom: 15px;
+        }
+        .update-type h3 {
+            margin: 0 0 10px 0;
+            color: #495057;
+        }
+        .update-type p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 EduRank Admin Panel</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            Manage automatic data updates from external APIs and sources
+        </p>
+
+        <div class="update-section">
+            <h2>🔄 Full Data Update</h2>
+            <p>Trigger a comprehensive update of all college data from external sources including:</p>
+            <ul>
+                <li>NIRF rankings and accreditation data</li>
+                <li>Latest news and announcements</li>
+                <li>Placement statistics and salary data</li>
+                <li>University website updates</li>
+            </ul>
+
+            <button id="fullUpdateBtn" class="update-btn" onclick="triggerUpdate()">
+                🚀 Start Full Update
+            </button>
+
+            <div id="status" class="status"></div>
+        </div>
+
+        <div class="update-section">
+            <h2>📊 Update Types</h2>
+
+            <div class="update-type">
+                <h3>NIRF Rankings</h3>
+                <p>Updates college rankings, accreditation grades, and performance metrics from NIRF data.</p>
+            </div>
+
+            <div class="update-type">
+                <h3>News & Announcements</h3>
+                <p>Fetches latest news, events, and announcements from college websites and news APIs.</p>
+            </div>
+
+            <div class="update-type">
+                <h3>Placement Data</h3>
+                <p>Updates placement statistics, salary packages, and recruitment information.</p>
+            </div>
+
+            <div class="update-type">
+                <h3>University Feeds</h3>
+                <p>Monitors RSS feeds and website changes for real-time updates.</p>
+            </div>
+        </div>
+
+        <div class="update-section">
+            <h2>📈 System Status</h2>
+            <p>Check the current status of the EduRank system:</p>
+            <button class="update-btn" onclick="checkHealth()" style="background: linear-gradient(45deg, #28a745, #1e7e34);">
+                🔍 Check System Health
+            </button>
+            <div id="healthStatus" class="status"></div>
+        </div>
+    </div>
+
+    <script>
+        async function triggerUpdate() {
+            const btn = document.getElementById('fullUpdateBtn');
+            const status = document.getElementById('status');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Updating...';
+
+            status.className = 'status info';
+            status.textContent = 'Starting data update process...';
+            status.style.display = 'block';
+
+            try {
+                const response = await fetch('/api/admin/update-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const text = await response.text();
+                let data = {};
+                try { data = text ? JSON.parse(text) : {}; } catch (err) { data = {}; }
+
+                if (response.ok) {
+                    status.className = 'status success';
+                    status.textContent = data.message + ' Check the server logs for progress.';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = 'Error: ' + (data.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = 'Network error: ' + error.message;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🚀 Start Full Update';
+            }
+        }
+
+        async function checkHealth() {
+            const status = document.getElementById('healthStatus');
+            status.className = 'status info';
+            status.textContent = 'Checking system health...';
+            status.style.display = 'block';
+
+            try {
+                const response = await fetch('/api/health');
+                const text = await response.text();
+                let data = {};
+                try { data = text ? JSON.parse(text) : {}; } catch (err) { data = {}; }
+
+                if (data.status === 'healthy') {
+                    status.className = 'status success';
+                    status.textContent = `✅ System is healthy! Database connected with ${data.colleges_count} colleges.`;
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ System unhealthy: ' + data.error;
+                }
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = '❌ Health check failed: ' + error.message;
+            }
+        }
+
+        // Auto-check health on page load
+        window.addEventListener('load', checkHealth);
+    </script>
+</body>
+</html>

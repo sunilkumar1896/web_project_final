@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduRank – Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f0e8; --card: #ffffff; --text: #1a1208; --muted: #6b6050;
+      --accent: #c84b11; --accent2: #e8a020; --border: #d8d0c0;
+      --error-bg: #fce8e6; --error-text: #731f20;
+      --success-bg: #e6f4ea; --success-text: #0f5132;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .panel-left {
+      background: linear-gradient(145deg, #1a1208 0%, #2d1f0a 55%, #1a3020 100%);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 3rem; position: relative; overflow: hidden;
+    }
+    .panel-left::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200,75,17,0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .brand { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--accent2); letter-spacing: -0.5px; position: relative; z-index: 1; }
+    .brand span { color: #fff; }
+    .panel-copy { position: relative; z-index: 1; }
+    .panel-copy h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+    .panel-copy h2 em { color: var(--accent2); font-style: normal; }
+    .panel-copy p { color: #b0a898; font-size: 0.95rem; line-height: 1.6; max-width: 340px; }
+    .stats-row { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .stat .num { font-family: 'Space Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--accent2); }
+    .stat .lbl { color: #888; font-size: 0.75rem; margin-top: 2px; }
+    .panel-right { display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; background: var(--bg); }
+    .form-box { width: min(440px, 100%); animation: fadeUp 0.5s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .form-header { margin-bottom: 2.5rem; }
+    .form-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; }
+    .form-header p { color: var(--muted); font-size: 0.9rem; }
+    .field { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text); margin-bottom: 6px; letter-spacing: 0.3px; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1rem; pointer-events: none; }
+    input { width: 100%; padding: 12px 14px 12px 40px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: #fff; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,75,17,0.12); }
+    .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0; transition: color 0.15s; }
+    .toggle-pw:hover { color: var(--accent); }
+    .btn-primary { width: 100%; padding: 14px 16px; border: none; border-radius: 10px; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; position: relative; overflow: hidden; margin-top: 0.5rem; }
+    .btn-primary:hover { background: #a83a08; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,75,17,0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+    .btn-primary .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-primary.loading .btn-text { display: none; }
+    .btn-primary.loading .spinner { display: block; }
+    .message { margin-top: 1rem; padding: 11px 14px; border-radius: 10px; font-size: 0.88rem; font-weight: 500; display: none; }
+    .message.error { background: var(--error-bg); color: var(--error-text); border: 1px solid #f1c0c0; }
+    .message.success { background: var(--success-bg); color: var(--success-text); border: 1px solid #badbcc; }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 1.5rem 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .divider span { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+    .link-row { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: 1.5rem; }
+    .link-row a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .link-row a:hover { text-decoration: underline; }
+    @media (max-width: 720px) { body { grid-template-columns: 1fr; } .panel-left { display: none; } .panel-right { padding: 2rem 1.5rem; align-items: flex-start; padding-top: 3rem; } }
+  </style>
+</head>
+<body>
+  <div class="panel-left">
+    <div class="brand">Edu<span>Rank</span></div>
+    <div class="panel-copy">
+      <h2>India's Most Trusted<br/><em>College Portal</em></h2>
+      <p>Compare 6,800+ engineering colleges on fees, placements, rankings, and more — all in one place.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="num">6,800+</div><div class="lbl">Colleges Listed</div></div>
+      <div class="stat"><div class="num">28L+</div><div class="lbl">Students Helped</div></div>
+      <div class="stat"><div class="num">₹4.3 CR</div><div class="lbl">Highest Package</div></div>
+    </div>
+  </div>
+  <div class="panel-right">
+    <div class="form-box">
+      <div class="form-header">
+        <h1>Welcome back</h1>
+        <p>Sign in to continue to EduRank</p>
+      </div>
+      <div class="field">
+        <label for="identifier">Email or Username</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉</span>
+          <input id="identifier" type="text" placeholder="you@example.com or username" autocomplete="username" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          <button class="toggle-pw" id="togglePw" type="button" title="Show/hide password">👁</button>
+        </div>
+      </div>
+      <button class="btn-primary" id="loginBtn">
+        <span class="btn-text">Sign In</span>
+        <div class="spinner"></div>
+      </button>
+      <div id="message" class="message"></div>
+      <div class="divider"><span>new to EduRank?</span></div>
+      <div class="link-row"><a href="/register">Create a free account →</a></div>
+    </div>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQSnNMV6EK1EixOMgx8VC1OIljDNnSHsg",
+      authDomain: "thefire-686d6.firebaseapp.com",
+      projectId: "thefire-686d6",
+      storageBucket: "thefire-686d6.firebasestorage.app",
+      messagingSenderId: "106840300160",
+      appId: "1:106840300160:web:e9cdf788a47910403c2465"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginBtn  = document.getElementById('loginBtn');
+    const messageEl = document.getElementById('message');
+    const togglePw  = document.getElementById('togglePw');
+    const pwInput   = document.getElementById('password');
+
+    togglePw.addEventListener('click', () => {
+      const show = pwInput.type === 'password';
+      pwInput.type = show ? 'text' : 'password';
+      togglePw.textContent = show ? '🙈' : '👁';
+    });
+
+    function showMsg(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = 'message ' + type;
+      messageEl.style.display = 'block';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+
+    loginBtn.addEventListener('click', async () => {
+      messageEl.style.display = 'none';
+      const identifier = document.getElementById('identifier').value.trim();
+      const password   = pwInput.value;
+
+      if (!identifier || !password) {
+        showMsg('Please enter your email/username and password.', 'error');
+        return;
+      }
+
+      loginBtn.classList.add('loading');
+      loginBtn.disabled = true;
+
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identifier);
+      try {
+        if (isEmail) {
+          try { await signInWithEmailAndPassword(auth, identifier, password); }
+          catch (fbErr) { console.warn('Firebase login skipped:', fbErr.code); }
+        }
+
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: identifier, password })
+        });
+
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (_) {}
+
+        if (response.ok) {
+          showMsg(data.message || 'Login successful! Redirecting…', 'success');
+          setTimeout(() => { window.location.href = '/'; }, 800);
+        } else {
+          showMsg(data.error || 'Login failed. Please check your credentials.', 'error');
+        }
+      } catch (error) {
+        showMsg(error.message || 'Something went wrong. Please try again.', 'error');
+      } finally {
+        loginBtn.classList.remove('loading');
+        loginBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

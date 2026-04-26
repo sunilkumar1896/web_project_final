@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>smart academic guide – Find Your Best B.Tech College</title>
+  <meta name="description" content="Smart Academic Guide helps students discover top B.Tech colleges in India with search, filters, verified reviews, and admissions insight." />
+  <meta name="keywords" content="smart academic guide, B.Tech college search, engineering colleges, IIT, NIT, college reviews, academic guide" />
+  <meta property="og:title" content="Smart Academic Guide | Best B.Tech College Finder" />
+  <meta property="og:description" content="Smart Academic Guide helps students find top engineering colleges in India with search, filters, verified reviews, and admissions guidance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Smart Academic Guide" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --bg2: #ede8dc;
+      --card: #ffffff;
+      --text: #1a1208;
+      --muted: #6b6050;
+      --accent: #c84b11;
+      --accent2: #e8a020;
+      --green: #2d7a4f;
+      --blue: #1a4d8f;
+      --border: #d8d0c0;
+      --shadow: 0 4px 24px rgba(26,18,8,0.10);
+      --radius: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--text);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--accent2);
+      letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { color: #fff; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: #ccc; text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff; border: none; cursor: pointer;
+      padding: 8px 20px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: #a83a08; transform: scale(1.04); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1208 0%, #2d1f0a 50%, #1a3020 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,75,17,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(232,160,32,0.15);
+      border: 1px solid rgba(232,160,32,0.4);
+      color: var(--accent2);
+      padding: 4px 16px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      max-width: 780px; margin: 0 auto 1.2rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em { color: var(--accent2); font-style: normal; }
+    .hero p {
+      color: #b0a898; font-size: 1.05rem;
+      max-width: 520px; margin: 0 auto 2.4rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-search {
+      display: flex; gap: 0; max-width: 600px;
+      margin: 0 auto 2rem;
+      background: #fff; border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: fadeUp .7s .3s ease both;
+    }
+    .hero-search input {
+      flex: 1; border: none; outline: none;
+      padding: 16px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; color: var(--text);
+      background: transparent;
+    }
+    .hero-search button {
+      background: var(--accent);
+      color: #fff; border: none; cursor: pointer;
+      padding: 14px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .hero-search button:hover { background: #a83a08; }
+
+    /* Search Suggestions */
+    .search-suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: #fff;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .search-suggestions.show { display: block; }
+    .suggestion-item {
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background .2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .suggestion-item:last-child { border-bottom: none; }
+    .suggestion-item:hover,
+    .suggestion-item.selected {
+      background: var(--bg2);
+    }
+    .suggestion-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .suggestion-location {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    mark {
+      background: var(--accent2);
+      color: var(--text);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .num {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--accent2);
+    }
+    .hero-stat .lbl { color: #888; font-size: 0.8rem; margin-top: 2px; }
+
+    /* ── BREADCRUMB & TITLE ── */
+    .page-header {
+      background: var(--bg2);
+      border-bottom: 2px solid var(--border);
+      padding: 1.2rem 2rem;
+    }
+    .breadcrumb { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--text);
+    }
+    .page-title span { color: var(--accent); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--card);
+      border-right: 2px solid var(--border);
+      padding: 1.5rem;
+      position: sticky; top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .filter-section { margin-bottom: 1.8rem; }
+    .filter-title {
+      font-weight: 700; font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 4px; cursor: pointer;
+      border-radius: 6px; transition: background .15s;
+    }
+    .filter-option:hover { background: var(--bg); }
+    .filter-option input[type=checkbox] {
+      accent-color: var(--accent);
+      width: 16px; height: 16px; cursor: pointer;
+    }
+    .filter-option label {
+      font-size: 0.875rem; cursor: pointer;
+      color: var(--text); flex: 1;
+    }
+    .filter-option .count {
+      font-size: 0.75rem; color: var(--muted);
+      background: var(--bg2);
+      padding: 1px 8px; border-radius: 100px;
+    }
+    .fee-range { margin-top: 0.5rem; }
+    .fee-range input[type=range] {
+      width: 100%; accent-color: var(--accent);
+      margin: 8px 0;
+    }
+    .fee-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
+    .clear-btn {
+      width: 100%; padding: 10px;
+      background: transparent; border: 1.5px solid var(--accent);
+      color: var(--accent); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      cursor: pointer; transition: all .2s;
+      margin-top: 0.5rem;
+    }
+    .clear-btn:hover { background: var(--accent); color: #fff; }
+
+    /* ── CONTENT AREA ── */
+    .content-area { padding: 1.5rem; }
+    .results-bar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap; gap: 0.75rem;
+    }
+    .results-count {
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .results-count strong { color: var(--text); }
+    .sort-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .sort-label { font-size: 0.82rem; color: var(--muted); }
+    .sort-btn {
+      padding: 6px 14px;
+      border: 1.5px solid var(--border);
+      background: var(--card); color: var(--text);
+      border-radius: 20px; font-size: 0.82rem;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-weight: 500; transition: all .2s;
+    }
+    .sort-btn.active, .sort-btn:hover {
+      background: var(--text); color: #fff; border-color: var(--text);
+    }
+
+    /* ── COLLEGE CARD ── */
+    .college-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      animation: fadeUp .5s ease both;
+    }
+    .college-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(26,18,8,0.14);
+      border-color: var(--accent2);
+    }
+    .card-top {
+      display: flex; gap: 1.2rem; padding: 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .college-logo {
+      width: 70px; height: 70px; flex-shrink: 0;
+      border-radius: 12px; overflow: hidden;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: #fff;
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .card-name a { color: inherit; text-decoration: none; }
+    .card-name a:hover { color: var(--accent); }
+    .card-location {
+      font-size: 0.82rem; color: var(--muted);
+      display: flex; align-items: center; gap: 4px;
+      margin-bottom: 8px;
+    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge {
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .badge-govt { background: #dff0e8; color: var(--green); border: 1px solid #b5ddc8; }
+    .badge-pvt { background: #fef3e2; color: #a0600a; border: 1px solid #f5d49a; }
+    .badge-aicte { background: #e8eef8; color: var(--blue); border: 1px solid #bccee8; }
+    .badge-naac { background: #f5e8f8; color: #6b1f8f; border: 1px solid #dcb5e8; }
+    .badge-nirf { background: #fce8e8; color: #8f1f1f; border: 1px solid #e8b5b5; }
+    .card-rank-box {
+      flex-shrink: 0;
+      text-align: center;
+      background: var(--text);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      min-width: 80px;
+    }
+    .rank-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .rank-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--accent2); line-height: 1;
+      margin: 4px 0 2px;
+    }
+    .rank-source { font-size: 0.65rem; color: #888; }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-item {
+      padding: 1rem 1.2rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-label {
+      font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--muted);
+      margin-bottom: 4px; font-weight: 600;
+    }
+    .stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem; font-weight: 700; color: var(--text);
+    }
+    .stat-value.green { color: var(--green); }
+    .stat-value.orange { color: var(--accent); }
+    .stat-value.blue { color: var(--blue); }
+    .stat-sub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+
+    .card-actions {
+      display: flex; gap: 0.75rem; padding: 1rem 1.4rem;
+      align-items: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 9px 22px;
+      background: var(--accent);
+      color: #fff; border: none; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.875rem;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-primary:hover { background: #a83a08; transform: scale(1.03); }
+    .btn-secondary {
+      padding: 8px 20px;
+      background: transparent;
+      color: var(--text); border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: var(--text); background: var(--bg); }
+    .compare-cb {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: var(--muted); cursor: pointer;
+    }
+    .compare-cb input { accent-color: var(--accent); }
+
+    /* ── RANKING TABLE ── */
+    .ranking-strip {
+      background: linear-gradient(90deg, #1a1208 0%, #2d1f0a 100%);
+      padding: 0.6rem 1.4rem;
+      display: flex; gap: 1.5rem; align-items: center;
+      overflow-x: auto; flex-wrap: nowrap;
+    }
+    .ranking-strip::-webkit-scrollbar { height: 2px; }
+    .rs-item { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .rs-agency { font-size: 0.7rem; color: #888; letter-spacing: 0.5px; text-transform: uppercase; }
+    .rs-rank {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem; color: var(--accent2); font-weight: 700;
+    }
+    .rs-divider { color: #333; }
+
+    /* ── TABS ── */
+    .tab-bar {
+      display: flex; gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.2rem;
+      overflow-x: auto;
+    }
+    .tab-bar::-webkit-scrollbar { height: 2px; }
+    .tab {
+      padding: 10px 20px;
+      font-size: 0.875rem; font-weight: 600;
+      color: var(--muted); cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px; white-space: nowrap;
+      transition: all .2s;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .state-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.2rem 0 1.6rem;
+    }
+    .state-chip {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .state-chip span {
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+    }
+    .state-chip.active,
+    .state-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── POPULAR EXAMS ── */
+    .exam-section {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .exam-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 1rem; color: var(--text);
+    }
+    .exam-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .exam-chip {
+      padding: 8px 16px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text); cursor: pointer;
+      transition: all .2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .exam-chip:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .exam-chip .cnt {
+      font-size: 0.7rem; color: var(--muted);
+      background: var(--bg2);
+      padding: 1px 7px; border-radius: 20px;
+    }
+    .exam-chip:hover .cnt { background: rgba(255,255,255,0.2); color: #fff; }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex; justify-content: center; gap: 0.5rem;
+      padding: 2rem 0;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      border: 1.5px solid var(--border);
+      background: var(--card); color: var(--text);
+      border-radius: 8px; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 0.9rem;
+      transition: all .2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: #888;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem; max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--accent2); margin-bottom: 0.8rem;
+    }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+    .footer-heading {
+      font-weight: 700; font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: #ccc; margin-bottom: 1rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.5rem; }
+    .footer-links a { color: #888; text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent2); }
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 1.2rem; text-align: center;
+      font-size: 0.8rem; color: #555;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .college-list { display: block; }
+    .college-card:nth-child(1) { animation-delay: .05s; }
+    .college-card:nth-child(2) { animation-delay: .1s; }
+    .college-card:nth-child(3) { animation-delay: .15s; }
+    .college-card:nth-child(4) { animation-delay: .2s; }
+    .college-card:nth-child(5) { animation-delay: .25s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: none; border-bottom: 2px solid var(--border); }
+      .card-stats { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .card-top { flex-direction: column; }
+      .card-rank-box { align-self: flex-start; }
+      .card-stats { grid-template-columns: repeat(2, 1fr); }
+      .hero h1 { font-size: 2rem; }
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+    .modal-overlay.active { display: block; }
+    .modal-content {
+      background: var(--card);
+      border-radius: var(--radius);
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.3s ease;
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      font-size: 1.8rem; cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-header {
+      display: flex; gap: 1rem; margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1rem;
+    }
+    .modal-logo {
+      width: 80px; height: 80px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.2rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .modal-title { flex: 1; }
+    .modal-title h2 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .modal-location { color: var(--muted); font-size: 0.9rem; }
+    .modal-section { margin-bottom: 1.5rem; }
+    .modal-section h3 {
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .modal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .modal-item { background: var(--bg); border-radius: 8px; padding: 1rem; text-align: center; }
+    .modal-item-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+    .modal-item-value { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .modal-desc { background: var(--bg); border-left: 4px solid var(--accent); padding: 1rem; border-radius: 4px; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+
+    /* ── FORM STYLES ── */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block; font-weight: 600; font-size: 0.9rem;
+      margin-bottom: 0.4rem; color: var(--text);
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .form-group textarea {
+      resize: vertical; min-height: 100px;
+    }
+    .btn-submit {
+      background: var(--accent);
+      color: #fff; border: none; cursor: pointer;
+      padding: 12px 24px; border-radius: 8px;
+      font-weight: 700; width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: #a83a08; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent); border: 1.5px solid var(--accent);
+      cursor: pointer; padding: 8px 16px; border-radius: 6px;
+      font-weight: 600; font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--accent); color: #fff; }
+
+    /* ── REVIEWS STYLES ── */
+    .reviews-list { margin-top: 1rem; }
+    .review-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .review-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .review-author {
+      font-weight: 600; color: var(--text);
+    }
+    .review-rating { color: var(--accent); font-size: 0.9rem; }
+    .review-text {
+      color: var(--text); line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .review-date { color: var(--muted); font-size: 0.8rem; }
+
+    /* ── COMPARE SIDEBAR ── */
+    .compare-sidebar {
+      position: fixed; right: -400px; top: 0;
+      width: 400px; height: 100vh;
+      background: var(--card);
+      border-left: 2px solid var(--border);
+      z-index: 900;
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 16px rgba(0,0,0,0.1);
+    }
+    .compare-sidebar.active { right: 0; }
+    .compare-header {
+      background: var(--bg2);
+      padding: 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 2px solid var(--border);
+      position: sticky; top: 0;
+    }
+    .compare-header h3 { margin: 0; font-size: 1.2rem; }
+    .compare-close {
+      background: none; border: none;
+      font-size: 1.5rem; cursor: pointer;
+      color: var(--muted);
+    }
+    .compare-list {
+      padding: 1.5rem;
+    }
+    .compare-item {
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex; justify-content: space-between;
+      align-items: center;
+    }
+    .compare-item-name { font-weight: 600; font-size: 0.9rem; }
+    .compare-remove {
+      background: none; border: none;
+      color: var(--accent); cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .compare-empty {
+      text-align: center; color: var(--muted);
+      padding: 2rem 0;
+    }
+    .compare-btn { 
+      background: var(--accent);
+      color: #fff; border: none; cursor: pointer;
+      padding: 12px; border-radius: 8px;
+      font-weight: 700; width: 100%;
+      margin-top: 1rem;
+    }
+    .compare-btn:hover { background: #a83a08; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      display: none;
+      z-index: 2000;
+      animation: slideIn 0.3s ease;
+    }
+    .toast.active { display: block; }
+    @keyframes slideIn {
+      from { transform: translateX(400px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQSnNMV6EK1EixOMgx8VC1OIljDNnSHsg",
+      authDomain: "thefire-686d6.firebaseapp.com",
+      projectId: "thefire-686d6",
+      storageBucket: "thefire-686d6.firebasestorage.app",
+      messagingSenderId: "106840300160",
+      appId: "1:106840300160:web:e9cdf788a47910403c2465"
+    };
+
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const firebaseAuth = getAuth(firebaseApp);
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Edu<span>Rank</span></div>
+  <ul class="nav-links">
+    <li><a href="#" data-course="B.Tech">B.Tech</a></li>
+    <li><a href="#" data-course="MBA">MBA</a></li>
+    <li><a href="#" data-course="M.Tech">M.Tech</a></li>
+    <li><a href="#" data-course="Medical">Medical</a></li>
+    <li><a href="#" data-course="Law">Law</a></li>
+    <li><a href="#" data-course="Rankings">Rankings</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="nav-cta" id="counsellingBtn">Free Counselling</button>
+    <div id="userGreeting" style="display:none;align-items:center;gap:8px;color:#ccc;font-size:0.85rem;font-weight:500;">
+      <div id="userAvatar" style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;"></div>
+      <span id="userNameDisplay"></span>
+    </div>
+    <button class="nav-cta" id="authButton" style="background:#333;border:1px solid #555;">Logout</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🎓 India's Most Trusted College Portal</div>
+  <h1>Smart Academic Guide: Find Your <em>Best B.Tech</em><br/>College in India</h1>
+  <p>Compare 6,800+ engineering colleges on fees, placements, rankings, and more — all in one place.</p>
+  <div class="hero-search">
+    <input type="text" placeholder="Search colleges, cities, courses…" />
+    <button>🔍 Search</button>
+    <div class="search-suggestions" id="searchSuggestions"></div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">6,800+</div><div class="lbl">Engineering Colleges</div></div>
+    <div class="hero-stat"><div class="num">28L+</div><div class="lbl">Students Helped</div></div>
+    <div class="hero-stat"><div class="num">1,867</div><div class="lbl">JEE Main Colleges</div></div>
+    <div class="hero-stat"><div class="num">₹4.3 CR</div><div class="lbl">Highest Package</div></div>
+  </div>
+</section>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="#">Home</a> › <a href="#">Courses</a> › <strong>B.Tech Colleges in India</strong>
+  </div>
+  <h2 class="page-title">Top <span>B.Tech Colleges</span> in India 2025</h2>
+</div>
+
+<div class="state-shortcuts">
+  <button class="state-chip" onclick="filterByState('Maharashtra', this)">Maharashtra <span>820</span></button>
+  <button class="state-chip" onclick="filterByState('Tamil Nadu', this)">Tamil Nadu <span>760</span></button>
+  <button class="state-chip" onclick="filterByState('Uttar Pradesh', this)">Uttar Pradesh <span>590</span></button>
+  <button class="state-chip" onclick="filterByState('Karnataka', this)">Karnataka <span>540</span></button>
+  <button class="state-chip" onclick="filterByState('Delhi', this)">Delhi NCR <span>720</span></button>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="filter-section">
+      <div class="filter-title">🎯 Entrance Exam</div>
+      <div class="filter-option"><input type="checkbox" id="jee" checked/><label for="jee">JEE Main</label><span class="count">1867</span></div>
+      <div class="filter-option"><input type="checkbox" id="jeeadv"/><label for="jeeadv">JEE Advanced</label><span class="count">23</span></div>
+      <div class="filter-option"><input type="checkbox" id="tnea"/><label for="tnea">TNEA</label><span class="count">509</span></div>
+      <div class="filter-option"><input type="checkbox" id="mhtcet"/><label for="mhtcet">MHT CET</label><span class="count">397</span></div>
+      <div class="filter-option"><input type="checkbox" id="wbjee"/><label for="wbjee">WBJEE</label><span class="count">182</span></div>
+      <div class="filter-option"><input type="checkbox" id="kcet"/><label for="kcet">KCET</label><span class="count">211</span></div>
+      <div class="filter-option"><input type="checkbox" id="bitsat"/><label for="bitsat">BITSAT</label><span class="count">3</span></div>
+    </div>
+
+    <div class="filter-section" data-filter="type">
+      <div class="filter-title">🏛️ College Type</div>
+      <div class="filter-option"><input type="checkbox" id="govt" value="Government"/><label for="govt">Government</label><span class="count">1,200</span></div>
+      <div class="filter-option"><input type="checkbox" id="pvt" value="Private"/><label for="pvt">Private</label><span class="count">5,600</span></div>
+      <div class="filter-option"><input type="checkbox" id="deemed" value="Deemed"/><label for="deemed">Deemed University</label><span class="count">210</span></div>
+    </div>
+
+    <div class="filter-section" data-filter="state">
+      <div class="filter-title">📍 State</div>
+      <div class="filter-option"><input type="checkbox" id="maharashtra" value="Maharashtra"/><label for="maharashtra">Maharashtra</label><span class="count">820</span></div>
+      <div class="filter-option"><input type="checkbox" id="tamilnadu" value="Tamil Nadu"/><label for="tamilnadu">Tamil Nadu</label><span class="count">760</span></div>
+      <div class="filter-option"><input type="checkbox" id="uttarpradesh" value="Uttar Pradesh"/><label for="uttarpradesh">Uttar Pradesh</label><span class="count">590</span></div>
+      <div class="filter-option"><input type="checkbox" id="karnataka" value="Karnataka"/><label for="karnataka">Karnataka</label><span class="count">540</span></div>
+      <div class="filter-option"><input type="checkbox" id="delhi" value="Delhi"/><label for="delhi">Delhi NCR</label><span class="count">720</span></div>
+      <div class="filter-option"><input type="checkbox" id="westbengal" value="West Bengal"/><label for="westbengal">West Bengal</label><span class="count">8</span></div>
+      <div class="filter-option"><input type="checkbox" id="rajasthan" value="Rajasthan"/><label for="rajasthan">Rajasthan</label><span class="count">5</span></div>
+      <div class="filter-option"><input type="checkbox" id="telangana" value="Telangana"/><label for="telangana">Telangana</label><span class="count">5</span></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">💻 Specialization</div>
+      <div class="filter-option"><input type="checkbox" id="cse" checked/><label for="cse">Computer Science</label><span class="count">4,200</span></div>
+      <div class="filter-option"><input type="checkbox" id="mech"/><label for="mech">Mechanical Engineering</label><span class="count">3,800</span></div>
+      <div class="filter-option"><input type="checkbox" id="ece"/><label for="ece">Electronics & Comm</label><span class="count">3,500</span></div>
+      <div class="filter-option"><input type="checkbox" id="civil"/><label for="civil">Civil Engineering</label><span class="count">3,100</span></div>
+      <div class="filter-option"><input type="checkbox" id="ee"/><label for="ee">Electrical Engineering</label><span class="count">2,900</span></div>
+      <div class="filter-option"><input type="checkbox" id="aiml"/><label for="aiml">AI & Machine Learning</label><span class="count">1,100</span></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">💰 Total Fee Range</div>
+      <div class="fee-range">
+        <input type="range" min="0" max="40" value="25" id="feeRange" oninput="document.getElementById('feeVal').textContent='₹'+this.value+'L'"/>
+        <div class="fee-labels">
+          <span>₹0</span>
+          <span id="feeVal">₹25L</span>
+          <span>₹40L+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">🏆 Ranking Agency</div>
+      <div class="filter-option"><input type="checkbox" id="nirf" checked/><label for="nirf">NIRF</label></div>
+      <div class="filter-option"><input type="checkbox" id="iirf"/><label for="iirf">IIRF</label></div>
+      <div class="filter-option"><input type="checkbox" id="qs"/><label for="qs">QS World</label></div>
+      <div class="filter-option"><input type="checkbox" id="cdrank"/><label for="cdrank">EduRank Score</label></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">📍 Location</div>
+      <div class="filter-option"><input type="checkbox" id="mh"/><label for="mh">Maharashtra</label><span class="count">820</span></div>
+      <div class="filter-option"><input type="checkbox" id="tn"/><label for="tn">Tamil Nadu</label><span class="count">760</span></div>
+      <div class="filter-option"><input type="checkbox" id="up"/><label for="up">Uttar Pradesh</label><span class="count">590</span></div>
+      <div class="filter-option"><input type="checkbox" id="ka"/><label for="ka">Karnataka</label><span class="count">540</span></div>
+      <div class="filter-option"><input type="checkbox" id="dl"/><label for="dl">Delhi NCR</label><span class="count">210</span></div>
+    </div>
+
+    <button class="clear-btn">✕ Clear All Filters</button>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content-area">
+
+    <!-- EXAMS QUICK FILTER -->
+    <div class="exam-section">
+      <div class="exam-section-title">🎯 Filter by Entrance Exam</div>
+      <div class="exam-grid">
+        <div class="exam-chip" data-exam="JEE Main">JEE Main <span class="cnt">1867</span></div>
+        <div class="exam-chip" data-exam="JEE Advanced">JEE Advanced <span class="cnt">23</span></div>
+        <div class="exam-chip" data-exam="TNEA">TNEA <span class="cnt">509</span></div>
+        <div class="exam-chip" data-exam="MHT CET">MHT CET <span class="cnt">397</span></div>
+        <div class="exam-chip" data-exam="WBJEE">WBJEE <span class="cnt">182</span></div>
+        <div class="exam-chip" data-exam="BITSAT">BITSAT <span class="cnt">3</span></div>
+        <div class="exam-chip" data-exam="KCET">KCET <span class="cnt">211</span></div>
+        <div class="exam-chip" data-exam="VITEEE">VITEEE <span class="cnt">4</span></div>
+      </div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+      <div class="tab active" onclick="filterByTab(this, '')">All Colleges</div>
+      <div class="tab" onclick="filterByTab(this, 'Government')">Government</div>
+      <div class="tab" onclick="filterByTab(this, 'Private')">Private</div>
+      <div class="tab" onclick="filterByTab(this, 'Top Ranked')">Top Ranked</div>
+      <div class="tab" onclick="filterByTab(this, 'Best Placements')">Best Placements</div>
+      <div class="tab" onclick="filterByTab(this, 'Low Fee')">Low Fee</div>
+    </div>
+
+    <!-- RESULTS BAR -->
+    <div class="results-bar">
+      <div class="results-count">Loading colleges…</div>
+      <div class="sort-row">
+        <span class="sort-label">Sort:</span>
+        <button class="sort-btn active">EduRank</button>
+        <button class="sort-btn">NIRF</button>
+        <button class="sort-btn">Fees ↑</button>
+        <button class="sort-btn">Placement</button>
+      </div>
+    </div>
+
+    <!-- COLLEGE CARDS (populated by JS) -->
+    <div class="college-list">
+    <!-- CARD 1: IIT Bombay -->
+    <div class="college-card">
+      <div class="card-top">
+        <div class="college-logo" style="background:linear-gradient(135deg,#1a3a7a,#2d5fc4)">IIT</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#">Indian Institute of Technology Bombay (IITB)</a></div>
+          <div class="card-location">📍 Powai, Mumbai, Maharashtra</div>
+          <div class="badge-row">
+            <span class="badge badge-govt">Government</span>
+            <span class="badge badge-aicte">AICTE Approved</span>
+            <span class="badge badge-naac">NAAC A++</span>
+            <span class="badge badge-nirf">NIRF #3</span>
+          </div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#1</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#3</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">QS Asia</span><span class="rs-rank">#42</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">India Today</span><span class="rs-rank">#1</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Outlook</span><span class="rs-rank">#2</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">1983/2000</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">₹9.28L</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">₹3.67 CR</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">₹22.5 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">JEE ADV</div>
+          <div class="stat-sub">Cutoff: OBC 215</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>
+
+    <!-- CARD 2: IIT Madras -->
+    <div class="college-card">
+      <div class="card-top">
+        <div class="college-logo" style="background:linear-gradient(135deg,#7a1a1a,#c42d2d)">IIT</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#">Indian Institute of Technology Madras (IITM)</a></div>
+          <div class="card-location">📍 Adyar, Chennai, Tamil Nadu</div>
+          <div class="badge-row">
+            <span class="badge badge-govt">Government</span>
+            <span class="badge badge-aicte">AICTE Approved</span>
+            <span class="badge badge-naac">NAAC A++</span>
+            <span class="badge badge-nirf">NIRF #1</span>
+          </div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#2</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#1</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">QS Asia</span><span class="rs-rank">#56</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">India Today</span><span class="rs-rank">#2</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Outlook</span><span class="rs-rank">#1</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">1975/2000</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">₹8.80L</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">₹4.30 CR</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">₹20.8 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">JEE ADV</div>
+          <div class="stat-sub">Cutoff: Gen 178</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>
+
+    <!-- CARD 3: NIT Trichy -->
+    <div class="college-card">
+      <div class="card-top">
+        <div class="college-logo" style="background:linear-gradient(135deg,#1a5a30,#2d9a55)">NIT</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#">National Institute of Technology Tiruchirappalli (NIT Trichy)</a></div>
+          <div class="card-location">📍 Tiruchirappalli, Tamil Nadu</div>
+          <div class="badge-row">
+            <span class="badge badge-govt">Government</span>
+            <span class="badge badge-aicte">AICTE Approved</span>
+            <span class="badge badge-naac">NAAC A+</span>
+            <span class="badge badge-nirf">NIRF #8</span>
+          </div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#8</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#8</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">IIRF</span><span class="rs-rank">#10</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">India Today</span><span class="rs-rank">#9</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">1820/2000</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">₹6.63L</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">₹1.60 CR</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">₹14.5 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">JEE Main</div>
+          <div class="stat-sub">Cutoff: Gen 4200</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>
+
+    <!-- CARD 4: VIT Vellore -->
+    <div class="college-card">
+      <div class="card-top">
+        <div class="college-logo" style="background:linear-gradient(135deg,#5a1a7a,#9a2dc4)">VIT</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#">Vellore Institute of Technology (VIT Vellore)</a></div>
+          <div class="card-location">📍 Vellore, Tamil Nadu</div>
+          <div class="badge-row">
+            <span class="badge badge-pvt">Private</span>
+            <span class="badge badge-aicte">AICTE Approved</span>
+            <span class="badge badge-naac">NAAC A++</span>
+            <span class="badge badge-nirf">NIRF #11</span>
+          </div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#11</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#11</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">QS Asia</span><span class="rs-rank">#175</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">IIRF</span><span class="rs-rank">#14</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">1760/2000</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">₹7.83L</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">₹52 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">₹7.8 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">VITEEE</div>
+          <div class="stat-sub">+ JEE Main</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>
+
+    <!-- CARD 5: BITS Pilani -->
+    <div class="college-card">
+      <div class="card-top">
+        <div class="college-logo" style="background:linear-gradient(135deg,#7a4a1a,#c47a2d)">BITS</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#">BITS Pilani – Birla Institute of Technology & Science</a></div>
+          <div class="card-location">📍 Pilani, Rajasthan</div>
+          <div class="badge-row">
+            <span class="badge badge-pvt">Deemed University</span>
+            <span class="badge badge-aicte">AICTE Approved</span>
+            <span class="badge badge-naac">NAAC A</span>
+            <span class="badge badge-nirf">NIRF #20</span>
+          </div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#14</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#20</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">QS Asia</span><span class="rs-rank">#220</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">India Today</span><span class="rs-rank">#11</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">1720/2000</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">₹18.92L</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">₹1.20 CR</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">₹19.2 LPA</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">BITSAT</div>
+          <div class="stat-sub">Cutoff: 380+</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">4</button>
+      <button class="page-btn">5</button>
+      <button class="page-btn">…</button>
+      <button class="page-btn">685</button>
+      <button class="page-btn">›</button>
+    </div>
+
+  </div>  <!-- end .college-list -->
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">EduRank</div>
+      <p class="footer-desc">India's most trusted college discovery platform. Compare 6,800+ colleges on fees, rankings, placements and make the best decision for your future.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Courses</div>
+      <ul class="footer-links">
+        <li><a href="#">B.Tech</a></li>
+        <li><a href="#">MBA</a></li>
+        <li><a href="#">M.Tech</a></li>
+        <li><a href="#">BCA / MCA</a></li>
+        <li><a href="#">Medical</a></li>
+        <li><a href="#">Law</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Resources</div>
+      <ul class="footer-links">
+        <li><a href="#">College Rankings</a></li>
+        <li><a href="#">Entrance Exams</a></li>
+        <li><a href="#">Scholarships</a></li>
+        <li><a href="#">Cutoffs 2025</a></li>
+        <li><a href="#">Placement Stats</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 EduRank. All rights reserved. | Data sourced from official college websites and government databases.
+  </div>
+</footer>
+
+<!-- COLLEGE DETAILS MODAL -->
+<div class="modal-overlay" id="detailsModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeDetailsModal()">×</button>
+    <div id="modalBody">
+      <div style="text-align:center;padding:2rem">
+        <div style="font-size:2rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+        <div style="margin-top:1rem;color:var(--muted)">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COUNSELLING FORM MODAL -->
+<div class="modal-overlay" id="counsellingModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeCounsellingModal()">×</button>
+    <h2 style="margin-bottom:1.5rem;color:var(--accent)">Free Counselling Registration</h2>
+    <form onsubmit="submitCounsellingForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="counselName" required/>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="counselEmail" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="counselPhone" required/>
+        </div>
+        <div class="form-group">
+          <label>Board / Stream</label>
+          <select id="counselStream">
+            <option value="">Select Stream</option>
+            <option value="12th CBSE">12th CBSE</option>
+            <option value="12th State Board">12th State Board</option>
+            <option value="JEE Advanced">JEE Advanced</option>
+            <option value="JEE Main">JEE Main</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Interested Courses *</label>
+        <select id="counselCourse" required>
+          <option value="">Select Course</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="MBA">MBA</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="Medical">Medical</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="counselMessage" placeholder="Tell us more about your requirements..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Request Free Counselling</button>
+    </form>
+  </div>
+</div>
+
+<!-- BROCHURE MODAL -->
+<div class="modal-overlay" id="brochureModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeBrochureModal()">×</button>
+    <h2 style="margin-bottom:1.5rem" id="brochureTitle">College Brochure</h2>
+    <div style="text-align:center;padding:2rem">
+      <div style="font-size:3rem;margin-bottom:1rem">📄</div>
+      <p>Download the official college brochure to get detailed information about programs, fees, facilities, and admissions.</p>
+      <button class="btn-submit" id="brochureDownloadBtn" style="margin-top:1.5rem">Download Brochure (PDF)</button>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARE SIDEBAR -->
+<div class="compare-sidebar" id="compareSidebar">
+  <div class="compare-header">
+    <h3>Shortlist (<span id="compareCount">0</span>)</h3>
+    <button class="compare-close" onclick="toggleCompareSidebar()">×</button>
+  </div>
+  <div class="compare-list" id="compareList">
+    <div class="compare-empty">No colleges added yet</div>
+  </div>
+  <div style="padding:1.5rem;border-top:2px solid var(--border)">
+    <button class="compare-btn" onclick="compareColleges()" id="compareSubmitBtn" style="display:none">Compare Selected</button>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────
+  const API_BASE = "/api";   // Use same-origin API path when served by Flask
+
+  // ── STATE ───────────────────────────────────────────────────────────────
+  let state = {
+    q:        "",
+    type:     [],   // e.g. ["Government","Private"]
+    state:    [],   // e.g. ["Maharashtra","Delhi"]
+    naac:     [],
+    fee_max:  null,
+    sort:     "edurank",
+    page:     1,
+    per_page: 10,
+    total:    0,
+    pages:    1,
+  };
+
+  // ── DOM refs ─────────────────────────────────────────────────────────────
+  const cardsContainer  = document.querySelector(".college-list") || (() => {
+    // wrap existing cards in a container if not already
+    const first = document.querySelector(".college-card");
+    const wrap  = document.createElement("div");
+    wrap.className = "college-list";
+    first.parentNode.insertBefore(wrap, first);
+    document.querySelectorAll(".college-card").forEach(c => wrap.appendChild(c));
+    return wrap;
+  })();
+  const resultsCountEl  = document.querySelector(".results-count");
+  const paginationEl    = document.querySelector(".pagination");
+  const searchInput     = document.querySelector(".hero-search input");
+  const searchBtn       = document.querySelector(".hero-search button");
+
+  // ── FETCH colleges from backend ──────────────────────────────────────────
+  async function fetchColleges() {
+    showLoading();
+
+    const params = new URLSearchParams();
+    if (state.q)               params.set("q",       state.q);
+    if (state.type.length)     params.set("type",    state.type.join(","));
+    if (state.state && state.state.length) params.set("state",   state.state.join(","));
+    if (state.naac.length)     params.set("naac",    state.naac.join(","));
+    if (state.fee_max !== null) params.set("fee_max", state.fee_max);
+    params.set("sort",     state.sort);
+    params.set("page",     state.page);
+    params.set("per_page", state.per_page);
+
+    const url = `${API_BASE}/colleges?${params}`;
+    console.log("🔍 Fetching:", url, "State:", state);
+
+    try {
+      const res  = await fetch(url);
+      if (!res.ok) throw new Error(`Server error: ${res.status}`);
+      const data = await res.json();
+
+      console.log("✅ API Response:", data.total, "colleges found");
+      state.total = data.total;
+      state.pages = data.pages;
+
+      renderCards(data.colleges);
+      renderPagination();
+      updateResultsCount();
+    } catch (err) {
+      console.error("❌ Fetch error:", err);
+      showError(err.message);
+    }
+  }
+
+  // ── RENDER a single card ─────────────────────────────────────────────────
+  function buildCard(c) {
+    const badges = [
+      c.type === "Government" ? `<span class="badge badge-govt">Government</span>` :
+      c.type === "Deemed"     ? `<span class="badge badge-pvt">Deemed University</span>` :
+                                `<span class="badge badge-pvt">Private</span>`,
+      c.aicte_approved ? `<span class="badge badge-aicte">AICTE Approved</span>` : "",
+      c.naac_grade     ? `<span class="badge badge-naac">NAAC ${c.naac_grade}</span>` : "",
+      c.nirf_rank      ? `<span class="badge badge-nirf">NIRF #${c.nirf_rank}</span>` : "",
+    ].join("");
+
+    return `
+    <div class="college-card" data-id="${c.id}">
+      <div class="card-top">
+        <div class="college-logo" style="background:${c.logo_gradient || '#333'}">${c.short_name || c.name.slice(0,3)}</div>
+        <div class="card-info">
+          <div class="card-name"><a href="#" onclick="showDetailsModal(${c.id}); return false;">${c.name}</a></div>
+          <div class="card-location">📍 ${c.location}</div>
+          <div class="badge-row">${badges}</div>
+        </div>
+        <div class="card-rank-box">
+          <div class="rank-label">EduRank</div>
+          <div class="rank-num">#${c.edurank}</div>
+          <div class="rank-source">2025</div>
+        </div>
+      </div>
+      <div class="ranking-strip">
+        <div class="rs-item"><span class="rs-agency">NIRF</span><span class="rs-rank">#${c.nirf_rank ?? "—"}</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">QS Asia</span><span class="rs-rank">#${c.qs_asia_rank ?? "—"}</span></div>
+        <div class="rs-divider">|</div>
+        <div class="rs-item"><span class="rs-agency">Score</span><span class="rs-rank">${c.score ?? "—"}</span></div>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-label">Total Fees</div>
+          <div class="stat-value orange">${c.total_fees ?? "—"}</div>
+          <div class="stat-sub">B.Tech (4 yrs)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Highest Package</div>
+          <div class="stat-value green">${c.highest_package ?? "—"}</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Median Package</div>
+          <div class="stat-value green">${c.median_package ?? "—"}</div>
+          <div class="stat-sub">2024 Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Entrance Exam</div>
+          <div class="stat-value blue">${c.entrance_exam ?? "—"}</div>
+          <div class="stat-sub">Cutoff varies</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary" onclick="showDetailsModal(${c.id})">View Details</button>
+        <button class="btn-secondary">📊 Compare</button>
+        <button class="btn-secondary">📥 Brochure</button>
+        <label class="compare-cb"><input type="checkbox"/> Add to Compare</label>
+      </div>
+    </div>`;
+  }
+
+  function renderCards(colleges) {
+    console.log("🎨 renderCards called with", colleges.length, "colleges");
+    if (!colleges.length) {
+      console.warn("⚠️  No colleges to display");
+      cardsContainer.innerHTML = `
+        <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+          <div style="font-size:3rem;margin-bottom:1rem">🎓</div>
+          <div style="font-size:1.1rem;font-weight:600">No colleges found</div>
+          <div style="font-size:0.875rem;margin-top:0.5rem">Try adjusting your filters or search query.</div>
+        </div>`;
+      return;
+    }
+    cardsContainer.innerHTML = colleges.map(buildCard).join("");
+    console.log("✅ Cards rendered in DOM, cardsContainer html length:", cardsContainer.innerHTML.length);
+
+    // Scroll-reveal animation
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "translateY(0)";
+        }
+      });
+    }, { threshold: 0.08 });
+    cardsContainer.querySelectorAll(".college-card").forEach(c => io.observe(c));
+  }
+
+  // ── PAGINATION ────────────────────────────────────────────────────────────
+  function renderPagination() {
+    if (!paginationEl) return;
+    const { page, pages } = state;
+    const btns = [];
+
+    // Always show first, last, current ±2
+    const visible = new Set([1, pages, page - 2, page - 1, page, page + 1, page + 2]
+      .filter(p => p >= 1 && p <= pages));
+
+    let prev = 0;
+    [...visible].sort((a, b) => a - b).forEach(p => {
+      if (prev && p - prev > 1) btns.push(`<button class="page-btn" disabled>…</button>`);
+      btns.push(`<button class="page-btn${p === page ? " active" : ""}" onclick="goPage(${p})">${p}</button>`);
+      prev = p;
+    });
+
+    paginationEl.innerHTML =
+      `<button class="page-btn" onclick="goPage(${page - 1})" ${page <= 1 ? "disabled" : ""}>‹</button>` +
+      btns.join("") +
+      `<button class="page-btn" onclick="goPage(${page + 1})" ${page >= pages ? "disabled" : ""}>›</button>`;
+  }
+
+  window.goPage = function(p) {
+    if (p < 1 || p > state.pages) return;
+    state.page = p;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    fetchColleges();
+  };
+
+  // ── RESULTS COUNT ─────────────────────────────────────────────────────────
+  function updateResultsCount() {
+    if (!resultsCountEl) return;
+    const from = (state.page - 1) * state.per_page + 1;
+    const to   = Math.min(state.page * state.per_page, state.total);
+    resultsCountEl.innerHTML =
+      `Showing <strong>${from}–${to}</strong> of <strong>${state.total.toLocaleString()}</strong> colleges`;
+  }
+
+  // ── LOADING / ERROR ───────────────────────────────────────────────────────
+  function showLoading() {
+    cardsContainer.innerHTML = `
+      <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+        <div style="font-size:2rem;margin-bottom:1rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+        <div style="font-size:0.95rem">Loading colleges…</div>
+      </div>`;
+  }
+  function showError(msg) {
+    cardsContainer.innerHTML = `
+      <div style="text-align:center;padding:4rem 2rem;color:#c84b11">
+        <div style="font-size:3rem;margin-bottom:1rem">⚠️</div>
+        <div style="font-weight:700;margin-bottom:0.5rem">Could not connect to backend</div>
+        <div style="font-size:0.85rem;color:var(--muted)">${msg}</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:1rem">Make sure your Flask server is running on <code>localhost:5000</code></div>
+      </div>`;
+  }
+
+  // ── SEARCH ────────────────────────────────────────────────────────────────
+  let searchTimer;
+  const suggestionsEl = document.getElementById("searchSuggestions");
+  let selectedSuggestionIndex = -1;
+
+  searchBtn.addEventListener("click", () => {
+    state.q    = searchInput.value.trim();
+    state.page = 1;
+    fetchColleges();
+    hideSuggestions();
+  });
+  searchInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      if (selectedSuggestionIndex >= 0) {
+        const items = suggestionsEl.querySelectorAll(".suggestion-item");
+        if (items[selectedSuggestionIndex]) {
+          items[selectedSuggestionIndex].click();
+        }
+      } else {
+        searchBtn.click();
+      }
+    } else if (e.key === "Escape") {
+      hideSuggestions();
+      selectedSuggestionIndex = -1;
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      navigateSuggestions(1);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      navigateSuggestions(-1);
+    }
+  });
+
+  // Debounced live search
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim();
+    clearTimeout(searchTimer);
+    selectedSuggestionIndex = -1;
+
+    if (query.length >= 2) {
+      searchTimer = setTimeout(() => {
+        fetchSuggestions(query);
+      }, 200);
+    } else {
+      hideSuggestions();
+    }
+
+    // Also update live search for filtering
+    searchTimer = setTimeout(() => {
+      state.q    = query;
+      state.page = 1;
+      fetchColleges();
+    }, 400);
+  });
+
+  // Hide suggestions when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!searchInput.closest('.hero-search').contains(e.target)) {
+      hideSuggestions();
+      selectedSuggestionIndex = -1;
+    }
+  });
+
+  async function fetchSuggestions(query) {
+    try {
+      const res = await fetch(`${API_BASE}/suggest?q=${encodeURIComponent(query)}`);
+      if (!res.ok) throw new Error(`Error: ${res.status}`);
+      const suggestions = await res.json();
+
+      if (suggestions.length > 0) {
+        showSuggestions(suggestions, query);
+      } else {
+        hideSuggestions();
+      }
+    } catch (err) {
+      console.error("Suggestions error:", err);
+      hideSuggestions();
+    }
+  }
+
+  function showSuggestions(suggestions, query) {
+    suggestionsEl.innerHTML = suggestions.map((s, index) => `
+      <div class="suggestion-item" onclick="selectSuggestion('${s.name.replace(/'/g, "\\'")}', ${index})" data-index="${index}">
+        <div>
+          <div class="suggestion-name">${highlightMatch(s.name, query)}</div>
+          <div class="suggestion-location">📍 ${s.location}, ${s.state}</div>
+        </div>
+      </div>
+    `).join("");
+    suggestionsEl.classList.add("show");
+  }
+
+  function hideSuggestions() {
+    suggestionsEl.classList.remove("show");
+    selectedSuggestionIndex = -1;
+  }
+
+  function selectSuggestion(name, index) {
+    searchInput.value = name;
+    state.q = name;
+    state.page = 1;
+    fetchColleges();
+    hideSuggestions();
+    searchInput.focus();
+  }
+
+  function navigateSuggestions(direction) {
+    const items = suggestionsEl.querySelectorAll(".suggestion-item");
+    if (items.length === 0) return;
+
+    // Remove previous selection
+    if (selectedSuggestionIndex >= 0) {
+      items[selectedSuggestionIndex].classList.remove("selected");
+    }
+
+    // Calculate new index
+    selectedSuggestionIndex += direction;
+    if (selectedSuggestionIndex < 0) selectedSuggestionIndex = items.length - 1;
+    if (selectedSuggestionIndex >= items.length) selectedSuggestionIndex = 0;
+
+    // Add selection
+    items[selectedSuggestionIndex].classList.add("selected");
+    items[selectedSuggestionIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  function highlightMatch(text, query) {
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  // ── SORT BUTTONS ──────────────────────────────────────────────────────────
+  const sortMap = {
+    "EduRank":   "edurank",
+    "NIRF":      "nirf",
+    "Fees ↑":    "fees",
+    "Placement": "placement",
+  };
+  document.querySelectorAll(".sort-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".sort-btn").forEach(b => b.classList.remove("active"));
+      this.classList.add("active");
+      state.sort = sortMap[this.textContent.trim()] || "edurank";
+      state.page = 1;
+      fetchColleges();
+    });
+  });
+
+  // ── SIDEBAR FILTERS ───────────────────────────────────────────────────────
+  document.querySelectorAll(".filter-option input[type=checkbox]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      // Collect all checked values per filter group
+      const typeChecked = [...document.querySelectorAll('.filter-section [data-filter="type"] input:checked')]
+        .map(i => i.value);
+      const stateChecked = [...document.querySelectorAll('.filter-section [data-filter="state"] input:checked')]
+        .map(i => i.value);
+      const naacChecked = [...document.querySelectorAll('.filter-section [data-filter="naac"] input:checked')]
+        .map(i => i.value);
+
+      state.type = typeChecked;
+      state.state = stateChecked;
+      state.naac = naacChecked;
+      state.page = 1;
+      fetchColleges();
+    });
+  });
+
+  // Fee range slider
+  const feeSlider = document.querySelector('.fee-range input[type=range]');
+  if (feeSlider) {
+    feeSlider.addEventListener("input", function () {
+      state.fee_max = parseFloat(this.value);
+      state.page    = 1;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(fetchColleges, 300);
+    });
+  }
+
+  // Clear filters button
+  const clearBtn = document.querySelector(".clear-btn");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-option input[type=checkbox]").forEach(cb => cb.checked = false);
+      document.querySelectorAll(".state-chip").forEach(btn => btn.classList.remove("active"));
+      if (feeSlider) feeSlider.value = feeSlider.max;
+      state.type    = [];
+      state.state   = [];
+      state.naac    = [];
+      state.fee_max = null;
+      state.page    = 1;
+      fetchColleges();
+    });
+  }
+
+  // ── Tab filtering by college type ─────────────────────────────────────
+  function filterByTab(el, filterType) {
+    console.log("🔘 filterByTab called with:", filterType);
+    // Update active tab
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+
+    // Apply filter based on tab
+    state.page = 1;
+    
+    if (filterType === '') {
+      // All colleges
+      state.type = [];
+      state.sort = 'edurank';
+    } else if (filterType === 'Government') {
+      state.type = ['Government'];
+      state.sort = 'edurank';
+    } else if (filterType === 'Private') {
+      state.type = ['Private', 'Deemed'];
+      state.sort = 'edurank';
+    } else if (filterType === 'Top Ranked') {
+      state.sort = 'edurank';
+      state.type = [];
+    } else if (filterType === 'Best Placements') {
+      state.sort = 'placement';
+      state.type = [];
+    } else if (filterType === 'Low Fee') {
+      state.sort = 'fees';
+      state.type = [];
+    }
+    state.state = [];
+    document.querySelectorAll(".state-chip").forEach(chip => chip.classList.remove("active"));
+
+    console.log("📋 State after filter:", { type: state.type, sort: state.sort });
+
+    // Update UI to reflect sort change
+    document.querySelectorAll(".sort-btn").forEach(btn => {
+      btn.classList.remove("active");
+      const btnSort = {
+        'EduRank': 'edurank',
+        'NIRF': 'nirf',
+        'Fees ↑': 'fees',
+        'Placement': 'placement'
+      }[btn.textContent.trim()];
+      if (btnSort === state.sort) btn.classList.add("active");
+    });
+
+    showToast(`Filtering: ${filterType || 'All Colleges'}`);
+    console.log("📡 Calling fetchColleges...");
+    fetchColleges();
+  }
+
+  // ── COURSE/PROGRAM NAVIGATION ─────────────────────────────────────────────
+  function filterByCourse(courseType) {
+    console.log("📚 filterByCourse called with:", courseType);
+
+    // Reset all filters
+    state.page = 1;
+    state.type = [];
+    state.naac = [];
+    state.fee_max = null;
+
+    // Clear tab selection
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+
+    // Clear checkbox filters
+    document.querySelectorAll(".filter-option input[type=checkbox]").forEach(cb => cb.checked = false);
+    document.querySelectorAll(".state-chip").forEach(chip => chip.classList.remove("active"));
+
+    // Apply course-specific filtering
+    if (courseType === 'B.Tech') {
+      // Show engineering colleges (JEE entrance exams)
+      state.q = 'JEE'; // Search for JEE in entrance exams
+      state.sort = 'edurank';
+      showToast("Showing B.Tech Engineering Colleges");
+    } else if (courseType === 'M.Tech') {
+      // Postgraduate engineering
+      state.q = 'M.Tech';
+      state.sort = 'edurank';
+      showToast("Showing M.Tech Programs");
+    } else if (courseType === 'MBA') {
+      // Business programs
+      state.q = 'MBA CAT';
+      state.sort = 'placement';
+      showToast("Showing MBA Programs");
+    } else if (courseType === 'Medical') {
+      // Medical programs
+      state.q = 'NEET Medical';
+      state.sort = 'edurank';
+      showToast("Showing Medical Colleges");
+    } else if (courseType === 'Law') {
+      // Law programs
+      state.q = 'CLAT Law';
+      state.sort = 'edurank';
+      showToast("Showing Law Colleges");
+    } else if (courseType === 'Rankings') {
+      // Show all colleges sorted by rankings
+      state.q = '';
+      state.sort = 'edurank';
+      showToast("Showing All Colleges by Rankings");
+    }
+
+    state.state = [];
+
+    // Update sort buttons
+    document.querySelectorAll(".sort-btn").forEach(btn => {
+      btn.classList.remove("active");
+      const btnSort = {
+        'EduRank': 'edurank',
+        'NIRF': 'nirf',
+        'Fees ↑': 'fees',
+        'Placement': 'placement'
+      }[btn.textContent.trim()];
+      if (btnSort === state.sort) btn.classList.add("active");
+    });
+
+    console.log("📋 Course filter state:", { q: state.q, sort: state.sort });
+    fetchColleges();
+  }
+
+  // ── STATE FILTER SHORTCUTS ───────────────────────────────────────────────
+  function filterByState(stateName, btn) {
+    console.log("📍 filterByState called with:", stateName);
+
+    // Clear previous state chips and tabs, then select the chosen state
+    document.querySelectorAll(".state-chip").forEach(chip => chip.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+
+    // Reset sidebar filters and course/search state
+    state.q = "";
+    searchInput.value = "";
+    state.type = [];
+    state.naac = [];
+    state.fee_max = null;
+    state.state = [stateName];
+    state.page = 1;
+
+    document.querySelectorAll(".filter-option input[type=checkbox]").forEach(cb => cb.checked = false);
+    if (feeSlider) feeSlider.value = feeSlider.max;
+
+    showToast(`Filtering by ${stateName}`);
+    fetchColleges();
+  }
+
+  // ── COLLEGE DETAILS MODAL ─────────────────────────────────────────────────
+  const modalEl = document.getElementById("detailsModal");
+  const modalBody = document.getElementById("modalBody");
+
+  async function showDetailsModal(collegeId) {
+    modalEl.classList.add("active");
+    modalBody.innerHTML = `
+      <div style="text-align:center;padding:2rem">
+        <div style="font-size:2rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+        <div style="margin-top:1rem;color:var(--muted)">Loading details...</div>
+      </div>`;
+
+    try {
+      const res = await fetch(`${API_BASE}/colleges/${collegeId}`);
+      if (!res.ok) throw new Error(`Error: ${res.status}`);
+      const college = await res.json();
+
+      const badges = [
+        college.type === "Government" ? `<span class="badge badge-govt">Government</span>` :
+        college.type === "Deemed" ? `<span class="badge badge-pvt">Deemed University</span>` :
+                                   `<span class="badge badge-pvt">Private</span>`,
+        college.aicte_approved ? `<span class="badge badge-aicte">AICTE Approved</span>` : "",
+        college.naac_grade ? `<span class="badge badge-naac">NAAC ${college.naac_grade}</span>` : "",
+        college.nirf_rank ? `<span class="badge badge-nirf">NIRF #${college.nirf_rank}</span>` : "",
+      ].join("");
+
+      modalBody.innerHTML = `
+        <div class="modal-header">
+          <div class="modal-logo" style="background:${college.logo_gradient || '#333'}">${college.short_name || college.name.slice(0,3)}</div>
+          <div class="modal-title">
+            <h2>${college.name}</h2>
+            <div class="modal-location">📍 ${college.location}, ${college.state}</div>
+            <div class="badge-row" style="margin-top:0.5rem">${badges}</div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Rankings</h3>
+          <div class="modal-grid">
+            <div class="modal-item">
+              <div class="modal-item-label">EduRank</div>
+              <div class="modal-item-value">#${college.edurank}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">NIRF Rank</div>
+              <div class="modal-item-value">${college.nirf_rank ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">QS Asia</div>
+              <div class="modal-item-value">#${college.qs_asia_rank ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">IIRF Rank</div>
+              <div class="modal-item-value">#${college.iirf_rank ?? "—"}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Admissions & Placements</h3>
+          <div class="modal-grid">
+            <div class="modal-item">
+              <div class="modal-item-label">Entrance Exam</div>
+              <div class="modal-item-value">${college.entrance_exam ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Highest Package</div>
+              <div class="modal-item-value" style="color:var(--green)">${college.highest_package ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Median Package</div>
+              <div class="modal-item-value" style="color:var(--green)">${college.median_package ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Placement %</div>
+              <div class="modal-item-value">${college.placement_percent ?? "—"}%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Fees & Infrastructure</h3>
+          <div class="modal-grid">
+            <div class="modal-item">
+              <div class="modal-item-label">Total Fees (4 yrs)</div>
+              <div class="modal-item-value" style="color:var(--accent)">${college.total_fees ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Established</div>
+              <div class="modal-item-value">${college.established ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Total Students</div>
+              <div class="modal-item-value">${college.total_students ?? "—"}</div>
+            </div>
+            <div class="modal-item">
+              <div class="modal-item-label">Website</div>
+              <div style="font-size:0.75rem;margin-top:0.3rem">
+                ${college.website ? `<a href="${college.website}" target="_blank" style="color:var(--accent)">Visit</a>` : "—"}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        ${college.about ? `<div class="modal-section">
+          <h3>About</h3>
+          <div class="modal-desc">${college.about}</div>
+        </div>` : ""}
+
+        <div class="modal-section">
+          <h3>Student Reviews</h3>
+          <div id="reviewsContainer">
+            <div style="text-align:center;padding:1rem;color:var(--muted)">Loading reviews...</div>
+          </div>
+          <button class="btn-secondary" onclick="showReviewForm(${college.id})" style="margin-top:1rem">Write a Review</button>
+        </div>
+      `;
+
+      // Load reviews after modal content is set
+      loadReviews(collegeId);
+    } catch (err) {
+      modalBody.innerHTML = `
+        <div style="text-align:center;padding:2rem;color:var(--accent)">
+          <div style="font-size:2rem;margin-bottom:1rem">⚠️</div>
+          <div style="font-weight:700">Could not load details</div>
+          <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem">${err.message}</div>
+        </div>`;
+    }
+  }
+
+  function closeDetailsModal() {
+    modalEl.classList.remove("active");
+  }
+
+  // Close modal when clicking outside
+  modalEl.addEventListener("click", (e) => {
+    if (e.target === modalEl) closeDetailsModal();
+  });
+
+  // ── REVIEWS FUNCTIONALITY ───────────────────────────────────────────────
+  async function loadReviews(collegeId) {
+    const container = document.getElementById("reviewsContainer");
+    try {
+      const res = await fetch(`${API_BASE}/colleges/${collegeId}/reviews`);
+      if (!res.ok) throw new Error(`Error: ${res.status}`);
+      const reviews = await res.json();
+
+      if (reviews.length === 0) {
+        container.innerHTML = `<div style="text-align:center;padding:1rem;color:var(--muted)">No reviews yet. Be the first to review!</div>`;
+        return;
+      }
+
+      const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+
+      container.innerHTML = `
+        <div style="margin-bottom:1rem;text-align:center">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--accent)">⭐ ${avgRating.toFixed(1)}</div>
+          <div style="font-size:0.85rem;color:var(--muted)">${reviews.length} review${reviews.length > 1 ? 's' : ''}</div>
+        </div>
+        <div class="reviews-list">
+          ${reviews.map(review => `
+            <div class="review-item">
+              <div class="review-header">
+                <div class="review-author">${review.student_name}</div>
+                <div class="review-rating">${'⭐'.repeat(review.rating)}</div>
+              </div>
+              <div class="review-text">${review.review_text}</div>
+              <div class="review-date" style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem">
+                ${new Date(review.created_at).toLocaleDateString()}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } catch (err) {
+      container.innerHTML = `<div style="text-align:center;padding:1rem;color:var(--accent)">⚠️ Could not load reviews</div>`;
+    }
+  }
+
+  function showReviewForm(collegeId) {
+    const formModal = document.createElement('div');
+    formModal.className = 'modal-overlay active';
+    formModal.id = 'reviewFormModal';
+    formModal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeReviewForm()">×</button>
+        <h2 style="margin-bottom:1.5rem;color:var(--accent)">Write a Review</h2>
+        <form onsubmit="submitReview(event, ${collegeId})" enctype="multipart/form-data">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="reviewName" required/>
+            </div>
+            <div class="form-group">
+              <label>Email (optional)</label>
+              <input type="email" id="reviewEmail"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Rating *</label>
+            <select id="reviewRating" required>
+              <option value="">Select Rating</option>
+              <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+              <option value="4">⭐⭐⭐⭐ Very Good</option>
+              <option value="3">⭐⭐⭐ Good</option>
+              <option value="2">⭐⭐ Fair</option>
+              <option value="1">⭐ Poor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Review *</label>
+            <textarea id="reviewText" placeholder="Share your experience..." required style="min-height:100px"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Upload Student ID Card *</label>
+            <input type="file" id="reviewIdCard" accept="image/*" required/>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:0.25rem">
+              Upload a clear photo of your student ID card for verification
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Submit Review</button>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(formModal);
+  }
+
+  function closeReviewForm() {
+    const modal = document.getElementById('reviewFormModal');
+    if (modal) modal.remove();
+  }
+
+  async function submitReview(event, collegeId) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('college_id', collegeId);
+    formData.append('student_name', document.getElementById('reviewName').value);
+    formData.append('student_email', document.getElementById('reviewEmail').value);
+    formData.append('review_text', document.getElementById('reviewText').value);
+    formData.append('rating', document.getElementById('reviewRating').value);
+    formData.append('id_card', document.getElementById('reviewIdCard').files[0]);
+
+    try {
+      const res = await fetch(`${API_BASE}/reviews`, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!res.ok) throw new Error(`Error: ${res.status}`);
+
+      const result = await res.json();
+      showToast("Review submitted! It will appear after verification.");
+      closeReviewForm();
+    } catch (err) {
+      showToast("Failed to submit review. Please try again.");
+      console.error(err);
+    }
+  }
+
+  // ── COMPARE / SHORTLIST FUNCTIONALITY ──────────────────────────────────
+  let compareList = [];
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("active");
+    setTimeout(() => toast.classList.remove("active"), 3000);
+  }
+
+  function toggleCompareSidebar() {
+    document.getElementById("compareSidebar").classList.toggle("active");
+  }
+
+  function addToCompare(collegeId, collegeName) {
+    if (compareList.find(c => c.id === collegeId)) {
+      compareList = compareList.filter(c => c.id !== collegeId);
+      showToast("Removed from shortlist");
+    } else {
+      if (compareList.length >= 5) {
+        showToast("Maximum 5 colleges can be compared");
+        return;
+      }
+      compareList.push({ id: collegeId, name: collegeName });
+      showToast("Added to shortlist!");
+    }
+    updateCompareList();
+  }
+
+  function updateCompareList() {
+    const list = document.getElementById("compareList");
+    const count = document.getElementById("compareCount");
+    const submitBtn = document.getElementById("compareSubmitBtn");
+
+    count.textContent = compareList.length;
+
+    if (compareList.length === 0) {
+      list.innerHTML = '<div class="compare-empty">No colleges added yet</div>';
+      submitBtn.style.display = "none";
+    } else {
+      list.innerHTML = compareList.map(c => `
+        <div class="compare-item">
+          <div class="compare-item-name">${c.name}</div>
+          <button class="compare-remove" onclick="addToCompare(${c.id}, '${c.name.replace(/'/g, "\\'")}')">✕</button>
+        </div>
+      `).join("");
+      submitBtn.style.display = "block";
+    }
+  }
+
+  function compareColleges() {
+    if (compareList.length < 2) {
+      showToast("Select at least 2 colleges to compare");
+      return;
+    }
+    showToast("Showing comparison view...");
+    console.log("Comparing colleges:", compareList);
+  }
+
+  // ── COUNSELLING FORM ───────────────────────────────────────────────────
+  document.querySelector(".nav-cta").addEventListener("click", () => {
+    document.getElementById("counsellingModal").classList.add("active");
+  });
+
+  // ── COUNSELLING MODAL ───────────────────────────────────────────────────
+  function showCounsellingModal() {
+    document.getElementById("counsellingModal").classList.add("active");
+  }
+
+  function closeCounsellingModal() {
+    document.getElementById("counsellingModal").classList.remove("active");
+  }
+
+  function submitCounsellingForm(e) {
+    e.preventDefault();
+    const name = document.getElementById("counselName").value;
+    const email = document.getElementById("counselEmail").value;
+    const phone = document.getElementById("counselPhone").value;
+    const course = document.getElementById("counselCourse").value;
+
+    console.log("Counselling Form Submitted:", { name, email, phone, course });
+
+    showToast("Counselling request submitted! We'll contact you soon.");
+    closeCounsellingModal();
+    e.target.reset();
+  }
+
+  // ── BROCHURE DOWNLOAD ──────────────────────────────────────────────────
+  function showBrochureModal(collegeId, collegeName) {
+    document.getElementById("brochureTitle").textContent = collegeName + " Brochure";
+    const btn = document.getElementById("brochureDownloadBtn");
+    btn.onclick = () => {
+      showToast("Brochure download starting...");
+      closeBrochureModal();
+    };
+    document.getElementById("brochureModal").classList.add("active");
+  }
+
+  function closeBrochureModal() {
+    document.getElementById("brochureModal").classList.remove("active");
+  }
+
+  // ── EXAM FILTERING ────────────────────────────────────────────────────
+  document.querySelectorAll(".exam-chip").forEach(chip => {
+    chip.addEventListener("click", function() {
+      const exam = this.getAttribute("data-exam");
+      state.q = exam;
+      state.page = 1;
+      fetchColleges();
+      searchInput.value = exam;
+      showToast("Filtering by " + exam);
+    });
+  });
+
+  // ── CLOSE MODALS ON OUTSIDE CLICK ──────────────────────────────────
+  document.querySelectorAll(".modal-overlay").forEach(modal => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+  });
+
+  // ── ATTACH ACTION BUTTONS TO CARDS ────────────────────────────────
+  function attachCardButtons() {
+    document.querySelectorAll(".college-card").forEach(card => {
+      const collegeId = card.getAttribute("data-id");
+      const collegeName = card.querySelector(".card-name a").textContent;
+
+      const btns = card.querySelectorAll(".btn-secondary");
+      const cbx = card.querySelector(".compare-cb input");
+
+      if (btns[0]) { // Compare button
+        btns[0].onclick = () => {
+          toggleCompareSidebar();
+        };
+      }
+
+      if (btns[1]) { // Brochure button
+        btns[1].onclick = () => showBrochureModal(collegeId, collegeName);
+      }
+
+      if (cbx) {
+        cbx.addEventListener("change", function() {
+          addToCompare(collegeId, collegeName);
+        });
+      }
+    });
+  }
+
+  // Override renderCards to attach buttons
+  const originalRenderCards = renderCards;
+  window.renderCards = function(colleges) {
+    console.log("🔄 Overridden renderCards wrapper called");
+    originalRenderCards(colleges);
+    console.log("📌 Attaching card buttons...");
+    attachCardButtons();
+    console.log("✅ Card buttons attached");
+  };
+
+  // ── NAVIGATION LINKS ───────────────────────────────────────────────────
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      const courseType = this.getAttribute("data-course") || this.textContent.trim();
+      filterByCourse(courseType);
+    });
+  });
+
+  // ── FREE COUNSELLING BUTTON ──────────────────────────────────────────────
+  const counsellingBtn = document.getElementById("counsellingBtn");
+  if (counsellingBtn) {
+    counsellingBtn.addEventListener("click", showCounsellingModal);
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  fetchColleges();
+
+  // Load current user and show greeting in nav
+  (async () => {
+    try {
+      const res = await fetch('/api/me');
+      const data = await res.json();
+      if (data.user) {
+        const greeting = document.getElementById('userGreeting');
+        const nameDisplay = document.getElementById('userNameDisplay');
+        const avatar = document.getElementById('userAvatar');
+        if (greeting && nameDisplay && avatar) {
+          const name = data.user.username || 'User';
+          nameDisplay.textContent = 'Hi, ' + name;
+          avatar.textContent = name.charAt(0).toUpperCase();
+          greeting.style.display = 'flex';
+        }
+      }
+    } catch(e) { /* silent */ }
+  })();
+
+  const authButton = document.getElementById('authButton');
+  if (authButton) {
+    authButton.addEventListener('click', async () => {
+      try {
+        await signOut(firebaseAuth);
+      } catch (err) {
+        console.warn('Firebase sign-out failed:', err);
+      }
+      try {
+        await fetch('/api/logout', { method: 'POST' });
+      } catch (err) {
+        console.error('Logout error', err);
+      }
+      window.location.href = '/login';
+    });
+  }
+</script>
+</body>
+</html>

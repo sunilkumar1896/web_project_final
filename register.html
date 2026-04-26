@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduRank – Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f0e8; --card: #ffffff; --text: #1a1208; --muted: #6b6050;
+      --accent: #c84b11; --accent2: #e8a020; --border: #d8d0c0;
+      --error-bg: #fce8e6; --error-text: #731f20;
+      --success-bg: #e6f4ea; --success-text: #0f5132;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .panel-left {
+      background: linear-gradient(145deg, #1a1208 0%, #2d1f0a 55%, #1a3020 100%);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 3rem; position: relative; overflow: hidden;
+    }
+    .panel-left::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200,75,17,0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .brand { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--accent2); letter-spacing: -0.5px; position: relative; z-index: 1; }
+    .brand span { color: #fff; }
+    .panel-copy { position: relative; z-index: 1; }
+    .panel-copy h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+    .panel-copy h2 em { color: var(--accent2); font-style: normal; }
+    .panel-copy p { color: #b0a898; font-size: 0.95rem; line-height: 1.6; max-width: 340px; }
+    .perks { list-style: none; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+    .perks li { display: flex; align-items: center; gap: 12px; color: #b0a898; font-size: 0.9rem; }
+    .perks li::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: rgba(200,75,17,0.25); color: var(--accent2); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+    .panel-right { display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--bg); overflow-y: auto; }
+    .form-box { width: min(460px, 100%); animation: fadeUp 0.5s ease both; padding: 1rem 0; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .form-header { margin-bottom: 2rem; }
+    .form-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; }
+    .form-header p { color: var(--muted); font-size: 0.9rem; }
+    .fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+    .field { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text); margin-bottom: 6px; letter-spacing: 0.3px; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1rem; pointer-events: none; }
+    input { width: 100%; padding: 12px 14px 12px 40px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: #fff; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,75,17,0.12); }
+    input.invalid { border-color: #e53e3e; }
+    .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0; transition: color 0.15s; }
+    .toggle-pw:hover { color: var(--accent); }
+    .pw-strength { margin-top: 6px; height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; }
+    .pw-strength-bar { height: 100%; width: 0; border-radius: 2px; transition: width 0.3s, background 0.3s; }
+    .pw-hint { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    .btn-primary { width: 100%; padding: 14px 16px; border: none; border-radius: 10px; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; position: relative; overflow: hidden; margin-top: 0.5rem; }
+    .btn-primary:hover { background: #a83a08; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,75,17,0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+    .btn-primary .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-primary.loading .btn-text { display: none; }
+    .btn-primary.loading .spinner { display: block; }
+    .message { margin-top: 1rem; padding: 11px 14px; border-radius: 10px; font-size: 0.88rem; font-weight: 500; display: none; }
+    .message.error { background: var(--error-bg); color: var(--error-text); border: 1px solid #f1c0c0; }
+    .message.success { background: var(--success-bg); color: var(--success-text); border: 1px solid #badbcc; }
+    .terms { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 1rem; line-height: 1.5; }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 1.5rem 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .divider span { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+    .link-row { text-align: center; font-size: 0.9rem; color: var(--muted); }
+    .link-row a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .link-row a:hover { text-decoration: underline; }
+    @media (max-width: 720px) { body { grid-template-columns: 1fr; } .panel-left { display: none; } .panel-right { padding: 2rem 1.5rem; } .fields-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="panel-left">
+    <div class="brand">Edu<span>Rank</span></div>
+    <div class="panel-copy">
+      <h2>Start your <em>college journey</em> the smart way</h2>
+      <p>Join millions of students finding the right college based on real data, not guesswork.</p>
+    </div>
+    <ul class="perks">
+      <li>Compare 6,800+ colleges side-by-side</li>
+      <li>Track placement stats & fee structures</li>
+      <li>Get personalised rank-based recommendations</li>
+      <li>Submit & read verified student reviews</li>
+    </ul>
+  </div>
+  <div class="panel-right">
+    <div class="form-box">
+      <div class="form-header">
+        <h1>Create account</h1>
+        <p>It's free — no credit card needed</p>
+      </div>
+
+      <div class="fields-row">
+        <div class="field" style="margin-bottom:0">
+          <label for="username">Username</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input id="username" type="text" placeholder="yourname" autocomplete="username" />
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label for="email">Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1.25rem">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input id="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" />
+          <button class="toggle-pw" id="togglePw" type="button" title="Show/hide">👁</button>
+        </div>
+        <div class="pw-strength"><div class="pw-strength-bar" id="pwBar"></div></div>
+        <div class="pw-hint" id="pwHint">Use letters, numbers & symbols for a strong password</div>
+      </div>
+
+      <div class="field">
+        <label for="confirm_password">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔐</span>
+          <input id="confirm_password" type="password" placeholder="Repeat your password" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <button class="btn-primary" id="registerBtn">
+        <span class="btn-text">Create Account</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div id="message" class="message"></div>
+
+      <p class="terms">By creating an account you agree to our <a href="#" style="color:var(--accent)">Terms of Service</a> and <a href="#" style="color:var(--accent)">Privacy Policy</a>.</p>
+
+      <div class="divider"><span>already have an account?</span></div>
+      <div class="link-row"><a href="/login">← Sign in</a></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQSnNMV6EK1EixOMgx8VC1OIljDNnSHsg",
+      authDomain: "thefire-686d6.firebaseapp.com",
+      projectId: "thefire-686d6",
+      storageBucket: "thefire-686d6.firebasestorage.app",
+      messagingSenderId: "106840300160",
+      appId: "1:106840300160:web:e9cdf788a47910403c2465"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const registerBtn = document.getElementById('registerBtn');
+    const messageEl   = document.getElementById('message');
+    const pwInput     = document.getElementById('password');
+    const pwBar       = document.getElementById('pwBar');
+    const pwHint      = document.getElementById('pwHint');
+    const togglePw    = document.getElementById('togglePw');
+
+    togglePw.addEventListener('click', () => {
+      const show = pwInput.type === 'password';
+      pwInput.type = show ? 'text' : 'password';
+      togglePw.textContent = show ? '🙈' : '👁';
+    });
+
+    function scorePassword(pw) {
+      let s = 0;
+      if (pw.length >= 8) s++;
+      if (/[A-Z]/.test(pw)) s++;
+      if (/[0-9]/.test(pw)) s++;
+      if (/[^A-Za-z0-9]/.test(pw)) s++;
+      return s;
+    }
+
+    pwInput.addEventListener('input', () => {
+      const pw = pwInput.value;
+      const score = scorePassword(pw);
+      const widths = ['0%', '25%', '50%', '75%', '100%'];
+      const colors = ['#ddd', '#e53e3e', '#e8a020', '#3182ce', '#2d7a4f'];
+      const hints  = ['', 'Too short', 'Weak', 'Moderate', 'Strong!'];
+      pwBar.style.width    = widths[score];
+      pwBar.style.background = colors[score];
+      pwHint.textContent   = pw.length ? hints[score] : 'Use letters, numbers & symbols for a strong password';
+    });
+
+    function showMsg(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = 'message ' + type;
+      messageEl.style.display = 'block';
+    }
+
+    registerBtn.addEventListener('click', async () => {
+      messageEl.style.display = 'none';
+      const username        = document.getElementById('username').value.trim();
+      const email           = document.getElementById('email').value.trim();
+      const password        = pwInput.value;
+      const confirmPassword = document.getElementById('confirm_password').value;
+
+      if (!username || !email || !password || !confirmPassword) {
+        showMsg('Please fill in all fields.', 'error');
+        return;
+      }
+      if (password !== confirmPassword) {
+        showMsg('Passwords do not match.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showMsg('Password must be at least 6 characters.', 'error');
+        return;
+      }
+
+      registerBtn.classList.add('loading');
+      registerBtn.disabled = true;
+
+      let firebaseUser = null;
+      try {
+        try {
+          firebaseUser = await createUserWithEmailAndPassword(auth, email, password);
+        } catch (fbErr) {
+          console.warn('Firebase registration skipped:', fbErr.code);
+        }
+
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password, confirm_password: confirmPassword })
+        });
+
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (_) {}
+
+        if (response.ok) {
+          showMsg(data.message || 'Account created! Redirecting to login…', 'success');
+          setTimeout(() => { window.location.href = '/login'; }, 1200);
+        } else {
+          // Rollback Firebase user if backend failed
+          if (firebaseUser && firebaseUser.user) {
+            try { await signOut(auth); await firebaseUser.user.delete(); } catch (_) {}
+          }
+          showMsg(data.error || 'Registration failed. Please try again.', 'error');
+        }
+      } catch (error) {
+        showMsg(error.message || 'Something went wrong. Please try again.', 'error');
+      } finally {
+        registerBtn.classList.remove('loading');
+        registerBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
