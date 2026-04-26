@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, send_from_directory, session, redirec
 from flask_cors import CORS
 import sqlite3
 import os
+import re
 import uuid
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -107,6 +108,12 @@ def register():
 
     if not username or not email or not password:
         return jsonify({"error": "Username, email and password are required."}), 400
+
+    if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+        return jsonify({"error": "Please enter a valid email address."}), 400
+
+    if len(password) < 6:
+        return jsonify({"error": "Password must be at least 6 characters."}), 400
 
     if password != confirm_password:
         return jsonify({"error": "Passwords do not match."}), 400
