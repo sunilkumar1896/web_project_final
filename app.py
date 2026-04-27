@@ -12,8 +12,9 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-key")
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_PERMANENT'] = False
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # ✅ Absolute DB path (correct)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -371,6 +372,11 @@ def health_check():
         }), 500
 
 
+@app.route("/health", methods=["GET"])
+def health():
+    return health_check()
+
+
 @app.route("/api/suggest", methods=["GET"])
 def suggest():
     q = request.args.get("q", "").strip()
@@ -582,4 +588,6 @@ if __name__ == "__main__":
         init_db()
         print("[OK] Database found. Starting server...")
 
-    app.run(host="0.0.0.0", debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    debug_mode = os.environ.get("FLASK_ENV", "").lower() != "production"
+    app.run(host="0.0.0.0", debug=debug_mode, port=port)

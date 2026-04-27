@@ -3,11 +3,11 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.db
-*.sqlite3
-uploads/
 .env
 .env.*
 *.log
 .DS_Store
 Thumbs.db
+uploads/
+# Keep the committed production database file in repository for Render deployment
+!colleges.db
