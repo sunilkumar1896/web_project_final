@@ -247,6 +247,9 @@ def get_colleges():
     types = [t.strip() for t in request.args.get("type", "").split(",") if t.strip()]
     states = [s.strip() for s in request.args.get("state", "").split(",") if s.strip()]
     naac = [n.strip() for n in request.args.get("naac", "").split(",") if n.strip()]
+    exams = [e.strip() for e in request.args.get("exam", "").split(",") if e.strip()]
+    specs = [s.strip() for s in request.args.get("spec", "").split(",") if s.strip()]
+    
     fee_max = request.args.get("fee_max", type=float)
     sort = request.args.get("sort", "edurank")
     page = max(1, request.args.get("page", 1, type=int))
@@ -255,17 +258,22 @@ def get_colleges():
     conn = get_db()
     params = []
 
-    # ✅ FIX: Use FTS search with fallback
+    # ✅ FIX: Use robust SQL builder that preserves all filters
+    base = "SELECT * FROM colleges WHERE 1=1"
+
     if q:
-        # Try FTS search first
-        base = """
-            SELECT c.* FROM colleges c
-            JOIN colleges_fts fts ON c.id = fts.rowid
-            WHERE colleges_fts MATCH ?
-        """
-        params.append(q + "*")
-    else:
-        base = "SELECT * FROM colleges WHERE 1=1"
+        base += " AND (name LIKE ? OR location LIKE ? OR about LIKE ?)"
+        params.extend([f"%{q}%", f"%{q}%", f"%{q}%"])
+
+    if exams:
+        exam_clauses = " OR ".join(["entrance_exam LIKE ?"] * len(exams))
+        base += f" AND ({exam_clauses})"
+        params.extend([f"%{e}%" for e in exams])
+
+    if specs:
+        spec_clauses = " OR ".join(["about LIKE ?"] * len(specs))
+        base += f" AND ({spec_clauses})"
+        params.extend([f"%{s}%" for s in specs])
 
     if types:
         base += f" AND type IN ({','.join('?'*len(types))})"
@@ -299,18 +307,8 @@ def get_colleges():
             params + [per_page, (page - 1) * per_page]
         ).fetchall()
     except Exception as e:
-        # If FTS fails, fallback to LIKE search
-        if q and "fts" in str(e).lower():
-            base = "SELECT * FROM colleges WHERE name LIKE ? OR location LIKE ?"
-            params = [f"%{q}%", f"%{q}%"]
-            total = conn.execute(f"SELECT COUNT(*) FROM ({base})", params).fetchone()[0]
-            rows = conn.execute(
-                base + " LIMIT ? OFFSET ?",
-                params + [per_page, (page - 1) * per_page]
-            ).fetchall()
-        else:
-            conn.close()
-            return jsonify({"error": f"Database error: {str(e)}"}), 500
+        conn.close()
+        return jsonify({"error": f"Database error: {str(e)}"}), 500
     finally:
         conn.close()
 

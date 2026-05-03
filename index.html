@@ -875,28 +875,21 @@
   <h2 class="page-title">Top <span>B.Tech Colleges</span> in India 2025</h2>
 </div>
 
-<div class="state-shortcuts">
-  <button class="state-chip" onclick="filterByState('Maharashtra', this)">Maharashtra <span>820</span></button>
-  <button class="state-chip" onclick="filterByState('Tamil Nadu', this)">Tamil Nadu <span>760</span></button>
-  <button class="state-chip" onclick="filterByState('Uttar Pradesh', this)">Uttar Pradesh <span>590</span></button>
-  <button class="state-chip" onclick="filterByState('Karnataka', this)">Karnataka <span>540</span></button>
-  <button class="state-chip" onclick="filterByState('Delhi', this)">Delhi NCR <span>720</span></button>
-</div>
 
 <!-- MAIN LAYOUT -->
 <div class="main-layout">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="filter-section">
+    <div class="filter-section" data-filter="exam">
       <div class="filter-title">🎯 Entrance Exam</div>
-      <div class="filter-option"><input type="checkbox" id="jee" checked/><label for="jee">JEE Main</label><span class="count">1867</span></div>
-      <div class="filter-option"><input type="checkbox" id="jeeadv"/><label for="jeeadv">JEE Advanced</label><span class="count">23</span></div>
-      <div class="filter-option"><input type="checkbox" id="tnea"/><label for="tnea">TNEA</label><span class="count">509</span></div>
-      <div class="filter-option"><input type="checkbox" id="mhtcet"/><label for="mhtcet">MHT CET</label><span class="count">397</span></div>
-      <div class="filter-option"><input type="checkbox" id="wbjee"/><label for="wbjee">WBJEE</label><span class="count">182</span></div>
-      <div class="filter-option"><input type="checkbox" id="kcet"/><label for="kcet">KCET</label><span class="count">211</span></div>
-      <div class="filter-option"><input type="checkbox" id="bitsat"/><label for="bitsat">BITSAT</label><span class="count">3</span></div>
+      <div class="filter-option"><input type="checkbox" id="jee" value="JEE Main" checked/><label for="jee">JEE Main</label><span class="count">1867</span></div>
+      <div class="filter-option"><input type="checkbox" id="jeeadv" value="JEE Advanced"/><label for="jeeadv">JEE Advanced</label><span class="count">23</span></div>
+      <div class="filter-option"><input type="checkbox" id="tnea" value="TNEA"/><label for="tnea">TNEA</label><span class="count">509</span></div>
+      <div class="filter-option"><input type="checkbox" id="mhtcet" value="MHT CET"/><label for="mhtcet">MHT CET</label><span class="count">397</span></div>
+      <div class="filter-option"><input type="checkbox" id="wbjee" value="WBJEE"/><label for="wbjee">WBJEE</label><span class="count">182</span></div>
+      <div class="filter-option"><input type="checkbox" id="kcet" value="KCET"/><label for="kcet">KCET</label><span class="count">211</span></div>
+      <div class="filter-option"><input type="checkbox" id="bitsat" value="BITSAT"/><label for="bitsat">BITSAT</label><span class="count">3</span></div>
     </div>
 
     <div class="filter-section" data-filter="type">
@@ -906,26 +899,15 @@
       <div class="filter-option"><input type="checkbox" id="deemed" value="Deemed"/><label for="deemed">Deemed University</label><span class="count">210</span></div>
     </div>
 
-    <div class="filter-section" data-filter="state">
-      <div class="filter-title">📍 State</div>
-      <div class="filter-option"><input type="checkbox" id="maharashtra" value="Maharashtra"/><label for="maharashtra">Maharashtra</label><span class="count">820</span></div>
-      <div class="filter-option"><input type="checkbox" id="tamilnadu" value="Tamil Nadu"/><label for="tamilnadu">Tamil Nadu</label><span class="count">760</span></div>
-      <div class="filter-option"><input type="checkbox" id="uttarpradesh" value="Uttar Pradesh"/><label for="uttarpradesh">Uttar Pradesh</label><span class="count">590</span></div>
-      <div class="filter-option"><input type="checkbox" id="karnataka" value="Karnataka"/><label for="karnataka">Karnataka</label><span class="count">540</span></div>
-      <div class="filter-option"><input type="checkbox" id="delhi" value="Delhi"/><label for="delhi">Delhi NCR</label><span class="count">720</span></div>
-      <div class="filter-option"><input type="checkbox" id="westbengal" value="West Bengal"/><label for="westbengal">West Bengal</label><span class="count">8</span></div>
-      <div class="filter-option"><input type="checkbox" id="rajasthan" value="Rajasthan"/><label for="rajasthan">Rajasthan</label><span class="count">5</span></div>
-      <div class="filter-option"><input type="checkbox" id="telangana" value="Telangana"/><label for="telangana">Telangana</label><span class="count">5</span></div>
-    </div>
 
-    <div class="filter-section">
+    <div class="filter-section" data-filter="spec">
       <div class="filter-title">💻 Specialization</div>
-      <div class="filter-option"><input type="checkbox" id="cse" checked/><label for="cse">Computer Science</label><span class="count">4,200</span></div>
-      <div class="filter-option"><input type="checkbox" id="mech"/><label for="mech">Mechanical Engineering</label><span class="count">3,800</span></div>
-      <div class="filter-option"><input type="checkbox" id="ece"/><label for="ece">Electronics & Comm</label><span class="count">3,500</span></div>
-      <div class="filter-option"><input type="checkbox" id="civil"/><label for="civil">Civil Engineering</label><span class="count">3,100</span></div>
-      <div class="filter-option"><input type="checkbox" id="ee"/><label for="ee">Electrical Engineering</label><span class="count">2,900</span></div>
-      <div class="filter-option"><input type="checkbox" id="aiml"/><label for="aiml">AI & Machine Learning</label><span class="count">1,100</span></div>
+      <div class="filter-option"><input type="checkbox" id="cse" value="Computer Science" checked/><label for="cse">Computer Science</label><span class="count">4,200</span></div>
+      <div class="filter-option"><input type="checkbox" id="mech" value="Mechanical"/><label for="mech">Mechanical Engineering</label><span class="count">3,800</span></div>
+      <div class="filter-option"><input type="checkbox" id="ece" value="Electronics"/><label for="ece">Electronics & Comm</label><span class="count">3,500</span></div>
+      <div class="filter-option"><input type="checkbox" id="civil" value="Civil"/><label for="civil">Civil Engineering</label><span class="count">3,100</span></div>
+      <div class="filter-option"><input type="checkbox" id="ee" value="Electrical"/><label for="ee">Electrical Engineering</label><span class="count">2,900</span></div>
+      <div class="filter-option"><input type="checkbox" id="aiml" value="Machine Learning"/><label for="aiml">AI & Machine Learning</label><span class="count">1,100</span></div>
     </div>
 
     <div class="filter-section">
@@ -948,13 +930,13 @@
       <div class="filter-option"><input type="checkbox" id="cdrank"/><label for="cdrank">EduRank Score</label></div>
     </div>
 
-    <div class="filter-section">
+    <div class="filter-section" data-filter="state">
       <div class="filter-title">📍 Location</div>
-      <div class="filter-option"><input type="checkbox" id="mh"/><label for="mh">Maharashtra</label><span class="count">820</span></div>
-      <div class="filter-option"><input type="checkbox" id="tn"/><label for="tn">Tamil Nadu</label><span class="count">760</span></div>
-      <div class="filter-option"><input type="checkbox" id="up"/><label for="up">Uttar Pradesh</label><span class="count">590</span></div>
-      <div class="filter-option"><input type="checkbox" id="ka"/><label for="ka">Karnataka</label><span class="count">540</span></div>
-      <div class="filter-option"><input type="checkbox" id="dl"/><label for="dl">Delhi NCR</label><span class="count">210</span></div>
+      <div class="filter-option"><input type="checkbox" id="mh" value="Maharashtra"/><label for="mh">Maharashtra</label><span class="count">820</span></div>
+      <div class="filter-option"><input type="checkbox" id="tn" value="Tamil Nadu"/><label for="tn">Tamil Nadu</label><span class="count">760</span></div>
+      <div class="filter-option"><input type="checkbox" id="up" value="Uttar Pradesh"/><label for="up">Uttar Pradesh</label><span class="count">590</span></div>
+      <div class="filter-option"><input type="checkbox" id="ka" value="Karnataka"/><label for="ka">Karnataka</label><span class="count">540</span></div>
+      <div class="filter-option"><input type="checkbox" id="dl" value="Delhi"/><label for="dl">Delhi NCR</label><span class="count">210</span></div>
     </div>
 
     <button class="clear-btn">✕ Clear All Filters</button>
@@ -1301,21 +1283,22 @@
       </div>
     </div>
 
-    <!-- PAGINATION -->
-    <div class="pagination">
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <button class="page-btn">4</button>
-      <button class="page-btn">5</button>
-      <button class="page-btn">…</button>
-      <button class="page-btn">685</button>
-      <button class="page-btn">›</button>
-    </div>
-
   </div>  <!-- end .college-list -->
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">4</button>
+    <button class="page-btn">5</button>
+    <button class="page-btn">…</button>
+    <button class="page-btn">685</button>
+    <button class="page-btn">›</button>
+  </div>
+
 </div>
-</div>
+
 
 <!-- FOOTER -->
 <footer>
@@ -1443,8 +1426,7 @@
   <div class="compare-header">
     <h3>Shortlist (<span id="compareCount">0</span>)</h3>
     <button class="compare-close" onclick="toggleCompareSidebar()">×</button>
-  </div>
-  <div class="compare-list" id="compareList">
+          <div class="compare-list" id="compareList">
     <div class="compare-empty">No colleges added yet</div>
   </div>
   <div style="padding:1.5rem;border-top:2px solid var(--border)">
@@ -1465,6 +1447,8 @@
     type:     [],   // e.g. ["Government","Private"]
     state:    [],   // e.g. ["Maharashtra","Delhi"]
     naac:     [],
+    exam:     ["JEE Main"],
+    spec:     ["Computer Science"],
     fee_max:  null,
     sort:     "edurank",
     page:     1,
@@ -1497,6 +1481,8 @@
     if (state.type.length)     params.set("type",    state.type.join(","));
     if (state.state && state.state.length) params.set("state",   state.state.join(","));
     if (state.naac.length)     params.set("naac",    state.naac.join(","));
+    if (state.exam && state.exam.length) params.set("exam", state.exam.join(","));
+    if (state.spec && state.spec.length) params.set("spec", state.spec.join(","));
     if (state.fee_max !== null) params.set("fee_max", state.fee_max);
     params.set("sort",     state.sort);
     params.set("page",     state.page);
@@ -1523,6 +1509,33 @@
     }
   }
 
+  function getLogoHtml(c, isModal = false) {
+    // Generate initials like "IIT" or "IB" to fit inside the square box
+    let initials = "";
+    if (c.short_name) {
+      initials = c.short_name.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase();
+    } else {
+      initials = c.name.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase();
+    }
+    
+    const bg = c.logo_gradient || '#333';
+    const className = isModal ? 'modal-logo' : 'college-logo';
+    
+    if (c.website) {
+      try {
+        const domain = new URL(c.website).hostname;
+        const logoUrl = `https://api.companyenrich.com/logo/${domain}`;
+        return `<div class="${className}" style="background:${bg}; padding:0;">
+                  <img src="${logoUrl}" alt="${initials}" style="width:100%; height:100%; object-fit:contain; background:#fff; border-radius:10px; padding:4px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                  <span style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">${initials}</span>
+                </div>`;
+      } catch (e) {
+        // Invalid URL, fallback to default
+      }
+    }
+    return `<div class="${className}" style="background:${bg}; display:flex; align-items:center; justify-content:center;">${initials}</div>`;
+  }
+
   // ── RENDER a single card ─────────────────────────────────────────────────
   function buildCard(c) {
     const badges = [
@@ -1537,7 +1550,7 @@
     return `
     <div class="college-card" data-id="${c.id}">
       <div class="card-top">
-        <div class="college-logo" style="background:${c.logo_gradient || '#333'}">${c.short_name || c.name.slice(0,3)}</div>
+        ${getLogoHtml(c, false)}
         <div class="card-info">
           <div class="card-name"><a href="#" onclick="showDetailsModal(${c.id}); return false;">${c.name}</a></div>
           <div class="card-location">📍 ${c.location}</div>
@@ -1822,16 +1835,22 @@
   document.querySelectorAll(".filter-option input[type=checkbox]").forEach(cb => {
     cb.addEventListener("change", () => {
       // Collect all checked values per filter group
-      const typeChecked = [...document.querySelectorAll('.filter-section [data-filter="type"] input:checked')]
+      const typeChecked = [...document.querySelectorAll('.filter-section[data-filter="type"] input:checked')]
         .map(i => i.value);
-      const stateChecked = [...document.querySelectorAll('.filter-section [data-filter="state"] input:checked')]
+      const stateChecked = [...document.querySelectorAll('.filter-section[data-filter="state"] input:checked')]
         .map(i => i.value);
-      const naacChecked = [...document.querySelectorAll('.filter-section [data-filter="naac"] input:checked')]
+      const naacChecked = [...document.querySelectorAll('.filter-section[data-filter="naac"] input:checked')]
+        .map(i => i.value);
+      const examChecked = [...document.querySelectorAll('.filter-section[data-filter="exam"] input:checked')]
+        .map(i => i.value);
+      const specChecked = [...document.querySelectorAll('.filter-section[data-filter="spec"] input:checked')]
         .map(i => i.value);
 
       state.type = typeChecked;
       state.state = stateChecked;
       state.naac = naacChecked;
+      state.exam = examChecked;
+      state.spec = specChecked;
       state.page = 1;
       fetchColleges();
     });
@@ -1858,6 +1877,8 @@
       state.type    = [];
       state.state   = [];
       state.naac    = [];
+      state.exam    = [];
+      state.spec    = [];
       state.fee_max = null;
       state.page    = 1;
       fetchColleges();
@@ -2037,7 +2058,7 @@
 
       modalBody.innerHTML = `
         <div class="modal-header">
-          <div class="modal-logo" style="background:${college.logo_gradient || '#333'}">${college.short_name || college.name.slice(0,3)}</div>
+          ${getLogoHtml(college, true)}
           <div class="modal-title">
             <h2>${college.name}</h2>
             <div class="modal-location">📍 ${college.location}, ${college.state}</div>
