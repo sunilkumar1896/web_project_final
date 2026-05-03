@@ -220,11 +220,13 @@ def logout_page():
 
 
 @app.route("/")
+@login_required()
 def home_page():
     return send_from_directory(BASE_DIR, "index.html")
 
 
 @app.route("/index.html")
+@login_required()
 def index_page():
     return send_from_directory(BASE_DIR, "index.html")
 
