@@ -557,22 +557,23 @@
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem; max-width: 1200px;
       margin: 0 auto 2rem;
+      text-align: center;
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem; font-weight: 900;
       color: var(--accent2); margin-bottom: 0.8rem;
     }
-    .footer-desc { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; max-width: 280px; margin: 0 auto; }
     .footer-heading {
       font-weight: 700; font-size: 0.78rem;
       text-transform: uppercase; letter-spacing: 1px;
       color: #ccc; margin-bottom: 1rem;
     }
-    .footer-links { list-style: none; }
+    .footer-links { list-style: none; padding: 0; }
     .footer-links li { margin-bottom: 0.5rem; }
     .footer-links a { color: #888; text-decoration: none; font-size: 0.85rem; transition: color .2s; }
     .footer-links a:hover { color: var(--accent2); }
@@ -800,11 +801,33 @@
       z-index: 2000;
       animation: slideIn 0.3s ease;
     }
-    .toast.active { display: block; }
+    .toast.active { display: block;    }
     @keyframes slideIn {
       from { transform: translateX(400px); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
+
+    /* ── PROFILE DROPDOWN ── */
+    .profile-container { position: relative; display: flex; align-items: center; }
+    .profile-dropdown {
+      position: absolute; top: 120%; right: 0; width: 260px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; box-shadow: var(--shadow);
+      display: none; flex-direction: column; z-index: 1000;
+      overflow: hidden;
+      animation: fadeUp 0.2s ease;
+    }
+    .profile-dropdown.active { display: flex; }
+    .pd-header { padding: 1.2rem; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.2); }
+    .pd-divider { height: 1px; background: var(--border); width: 100%; }
+    .pd-item {
+      padding: 1rem 1.2rem; cursor: pointer; color: var(--text);
+      font-weight: 500; font-size: 0.9rem; transition: background 0.2s;
+    }
+    .pd-item:hover { background: rgba(255,255,255,0.05); }
+    .user-greeting { cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: background 0.2s; }
+    .user-greeting:hover { background: rgba(255,255,255,0.1); }
+
   </style>
   <script type="module">
     // Import the functions you need from the SDKs you need
@@ -841,11 +864,33 @@
   </ul>
   <div style="display:flex;align-items:center;gap:10px;">
     <button class="nav-cta" id="counsellingBtn">Free Counselling</button>
-    <div id="userGreeting" style="display:none;align-items:center;gap:8px;color:#ccc;font-size:0.85rem;font-weight:500;">
-      <div id="userAvatar" style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;"></div>
-      <span id="userNameDisplay"></span>
+    <div class="profile-container" id="profileContainer" style="display:none;">
+      <div id="userGreeting" class="user-greeting" style="display:flex;align-items:center;gap:8px;color:#ccc;font-size:0.85rem;font-weight:500;">
+        <div id="userAvatar" style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;"></div>
+        <span id="userNameDisplay"></span>
+        <span style="font-size:0.6rem;color:#888;margin-left:4px;">▼</span>
+      </div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="pd-header">
+          <div id="pdAvatar" style="width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;flex-shrink:0;"></div>
+          <div>
+            <div id="pdName" style="font-weight:700;color:#fff;margin-bottom:4px;font-size:1rem;"></div>
+            <div id="pdEmail" style="font-size:0.8rem;color:#aaa;"></div>
+          </div>
+        </div>
+        <div class="pd-divider"></div>
+        <div class="pd-item" onclick="toggleCompareSidebar(); document.getElementById('profileDropdown').classList.remove('active');">
+          📋 My Shortlist
+        </div>
+        <div class="pd-item" onclick="document.getElementById('counsellingBtn').click(); document.getElementById('profileDropdown').classList.remove('active');">
+          🎓 Request Counselling
+        </div>
+        <div class="pd-divider"></div>
+        <div class="pd-item" id="authButton" style="color:#e06c6c;">
+          🚪 Logout
+        </div>
+      </div>
     </div>
-    <button class="nav-cta" id="authButton" style="background:#333;border:1px solid #555;">Logout</button>
   </div>
 </nav>
 
@@ -881,17 +926,6 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="filter-section" data-filter="exam">
-      <div class="filter-title">🎯 Entrance Exam</div>
-      <div class="filter-option"><input type="checkbox" id="jee" value="JEE Main" checked/><label for="jee">JEE Main</label><span class="count">1867</span></div>
-      <div class="filter-option"><input type="checkbox" id="jeeadv" value="JEE Advanced"/><label for="jeeadv">JEE Advanced</label><span class="count">23</span></div>
-      <div class="filter-option"><input type="checkbox" id="tnea" value="TNEA"/><label for="tnea">TNEA</label><span class="count">509</span></div>
-      <div class="filter-option"><input type="checkbox" id="mhtcet" value="MHT CET"/><label for="mhtcet">MHT CET</label><span class="count">397</span></div>
-      <div class="filter-option"><input type="checkbox" id="wbjee" value="WBJEE"/><label for="wbjee">WBJEE</label><span class="count">182</span></div>
-      <div class="filter-option"><input type="checkbox" id="kcet" value="KCET"/><label for="kcet">KCET</label><span class="count">211</span></div>
-      <div class="filter-option"><input type="checkbox" id="bitsat" value="BITSAT"/><label for="bitsat">BITSAT</label><span class="count">3</span></div>
-    </div>
-
     <div class="filter-section" data-filter="type">
       <div class="filter-title">🏛️ College Type</div>
       <div class="filter-option"><input type="checkbox" id="govt" value="Government"/><label for="govt">Government</label><span class="count">1,200</span></div>
@@ -1945,6 +1979,8 @@
     state.page = 1;
     state.type = [];
     state.naac = [];
+    state.exam = [];
+    state.spec = [];
     state.fee_max = null;
 
     // Clear tab selection
@@ -2474,18 +2510,45 @@
       const res = await fetch('/api/me');
       const data = await res.json();
       if (data.user) {
+        const pContainer = document.getElementById('profileContainer');
         const greeting = document.getElementById('userGreeting');
         const nameDisplay = document.getElementById('userNameDisplay');
         const avatar = document.getElementById('userAvatar');
-        if (greeting && nameDisplay && avatar) {
+        const pdName = document.getElementById('pdName');
+        const pdEmail = document.getElementById('pdEmail');
+        const pdAvatar = document.getElementById('pdAvatar');
+        
+        if (pContainer && nameDisplay && avatar) {
           const name = data.user.username || 'User';
+          const email = data.user.email || 'No email provided';
+          const initial = name.charAt(0).toUpperCase();
+          
           nameDisplay.textContent = 'Hi, ' + name;
-          avatar.textContent = name.charAt(0).toUpperCase();
-          greeting.style.display = 'flex';
+          avatar.textContent = initial;
+          if (pdName) pdName.textContent = name;
+          if (pdEmail) pdEmail.textContent = email;
+          if (pdAvatar) pdAvatar.textContent = initial;
+          
+          pContainer.style.display = 'flex';
         }
       }
     } catch(e) { /* silent */ }
   })();
+
+  // Profile dropdown toggle
+  const userGreeting = document.getElementById('userGreeting');
+  const profileDropdown = document.getElementById('profileDropdown');
+  if (userGreeting && profileDropdown) {
+    userGreeting.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if (!profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove('active');
+      }
+    });
+  }
 
   const authButton = document.getElementById('authButton');
   if (authButton) {

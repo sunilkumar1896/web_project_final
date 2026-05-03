@@ -184,10 +184,16 @@ def logout():
 def get_current_user():
     if not session.get("user_id"):
         return jsonify({"user": None}), 200
+        
+    conn = get_db()
+    user_row = conn.execute("SELECT email FROM users WHERE id = ?", (session.get("user_id"),)).fetchone()
+    conn.close()
+    
     return jsonify({
         "user": {
             "id": session.get("user_id"),
             "username": session.get("username"),
+            "email": user_row["email"] if user_row else None,
             "is_admin": session.get("is_admin")
         }
     })
@@ -262,8 +268,10 @@ def get_colleges():
     base = "SELECT * FROM colleges WHERE 1=1"
 
     if q:
-        base += " AND (name LIKE ? OR location LIKE ? OR about LIKE ?)"
-        params.extend([f"%{q}%", f"%{q}%", f"%{q}%"])
+        q_terms = q.split()
+        for term in q_terms:
+            base += " AND (name LIKE ? OR location LIKE ? OR about LIKE ? OR entrance_exam LIKE ?)"
+            params.extend([f"%{term}%", f"%{term}%", f"%{term}%", f"%{term}%"])
 
     if exams:
         exam_clauses = " OR ".join(["entrance_exam LIKE ?"] * len(exams))
